@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="inventory.MainController">
+    <children>
+        <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                 prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0"
+                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <tabs>
+                <Tab fx:id="tab_home" text="Home">
+                    <fx:include fx:id="tab_home_page" source="tab_home/tab_home.fxml"/>
+                </Tab>
+                <Tab fx:id="tab_inventory" text="Inventory">
+                    <fx:include fx:id="tab_inventory_page" source="tab_inventory/tab_inventory.fxml"/>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>
