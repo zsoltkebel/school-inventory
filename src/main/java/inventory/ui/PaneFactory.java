@@ -59,7 +59,7 @@ public class PaneFactory {
         Button returnButton = (Button) reservationPane.lookup("#returnButton");
 
         returnButton.setOnAction(event -> {
-            ReservationManager.getInstance().changeAvailability(reservation.getId(), true);
+            ReservationManager.getInstance().returnReservation(reservation.getId(), true);
 //            Inventory.getInstance().changeItemAvailability(Inventory.getInstance().getItem(reservation.getItemId()).getId(), true);
         });
 

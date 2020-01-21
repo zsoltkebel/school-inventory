@@ -129,8 +129,10 @@ public class Database {
                 Method getter = getterMethod(field);
 
                 try {
+                    assert setter != null;
+                    assert getter != null;
                     setter.invoke(statement, i + 1, getter.invoke(record));
-                } catch (NullPointerException | IllegalAccessException | InvocationTargetException e) {
+                } catch (IllegalAccessException | InvocationTargetException e) {
                     e.printStackTrace();
                 }
             }

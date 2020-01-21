@@ -1,6 +1,5 @@
 package inventory.utils;
 
-import inventory.model.Mappable;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -10,10 +9,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 
 public class JSONUtil {
 
@@ -25,9 +20,7 @@ public class JSONUtil {
 
         try {
             File file = new File(fileName);
-            if (file.createNewFile()) {
-                saveJSONArray(fileName, new ArrayList<>());
-            }
+            if (file.createNewFile());
 
             FileReader reader = new FileReader(fileName);
 
@@ -45,24 +38,6 @@ public class JSONUtil {
             e.printStackTrace();
         } catch (NullPointerException e) {
 
-        }
-    }
-
-    public static void saveJSONArray(String fileName, List<Mappable> list) {
-        JSONArray jsonArray = new JSONArray();
-
-        list.forEach(item -> {
-            JSONObject jsonObject = new JSONObject();
-
-            jsonObject.putAll(item.map());
-
-            jsonArray.add(jsonObject);
-        });
-
-        try {
-            Files.write(Paths.get(fileName), jsonArray.toJSONString().getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }

@@ -37,16 +37,7 @@ public class ReservationManager {
     private ObservableList<Reservation> activeReservations = FXCollections.observableArrayList();
 
     private ReservationManager() {
-        JSONUtil.readJSONArray("timetable.json", object -> {
-            try {
-                Date start = new Date(sdf.parse((String) object.get("start")).getTime());
-                Date end = new Date(sdf.parse((String) object.get("end")).getTime());
-
-                timeTable.add(new Lesson(((Long) object.get("no")).intValue(), start, end));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        });
+        JSONUtil.readJSONArray("timetable.json", object -> timeTable.add(Lesson.newLesson(object)));
 
         reservations.addListener((ListChangeListener<Reservation>) c -> {
             loadActiveReservations();
@@ -81,14 +72,6 @@ public class ReservationManager {
         activeReservations.addAll(reservations.stream()
                 .filter(reservation -> reservation.during(date) || (reservation.before(date) && !reservation.isReturned()))
                 .collect(Collectors.toList()));
-
-        activeReservations.forEach(reservation -> {
-            if (!reservation.isReturned()) {
-                Item item = Inventory.getInstance().getItem(reservation.getItemId());
-
-                Inventory.getInstance().changeItemAvailability(reservation.itemId, false);
-            }
-        });
     }
 
     private void updateReservation(Reservation oldReservation, Reservation newReservation) {
@@ -97,12 +80,12 @@ public class ReservationManager {
         reservations.set(index, Database.getInstance().update(Database.TABLE_RESERVATIONS, newReservation));
     }
 
-    public void changeAvailability(int reservationId, boolean available) {
+    public void returnReservation(int reservationId, boolean returned) {
         Reservation oldReservation = getReservation(reservationId);
 
         Reservation newReservation = new Reservation(oldReservation);
 
-        newReservation.setReturned(available);
+        newReservation.setReturned(returned);
 
         updateReservation(oldReservation, newReservation);
     }

@@ -1,8 +1,6 @@
 package inventory;
 
 import inventory.model.Inventory;
-import inventory.model.Lesson;
-import inventory.model.ReservationManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -32,16 +30,6 @@ public class Main extends Application {
 
         primaryStage.setWidth(PREF_WIDTH);
         primaryStage.setHeight(PREF_HEIGHT);
-
-        Inventory.getInstance();
-
-//        String DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
-//
-//        Class.forName(DRIVER);
-//
-//        String dbUrl = "jdbc:derby:myDB;create=true";
-//        Connection conn = DriverManager.getConnection(dbUrl);
-
     }
 
 

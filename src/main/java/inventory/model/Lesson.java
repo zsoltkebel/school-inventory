@@ -1,18 +1,21 @@
 package inventory.model;
 
+import org.json.simple.JSONObject;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalTime;
+import java.util.Arrays;
 
 public class Lesson {
 
     DateFormat sdf = new SimpleDateFormat("HH:mm");
 
     private int no;
-    private Date start;
-    private Date end;
+    private LocalTime start;
+    private LocalTime end;
 
-    public Lesson(int no, Date start, Date end) {
+    public Lesson(int no, LocalTime start, LocalTime end) {
         this.no = no;
         this.start = start;
         this.end = end;
@@ -22,7 +25,7 @@ public class Lesson {
         return no;
     }
 
-    public Date getStart() {
+    public LocalTime getStart() {
         return start;
     }
 
@@ -30,11 +33,26 @@ public class Lesson {
         return sdf.format(start);
     }
 
-    public Date getEnd() {
+    public LocalTime getEnd() {
         return end;
     }
 
     public String getEndString() {
         return sdf.format(end);
+    }
+
+    public static Lesson newLesson(JSONObject jsonObject) {
+        int id = ((Long) jsonObject.get("no")).intValue();
+        Integer[] start = Arrays.stream(((String) jsonObject.get("start")).split(":"))
+                .limit(2)
+                .map(Integer::valueOf)
+                .toArray(Integer[]::new);
+        Integer[] end = Arrays.stream(((String) jsonObject.get("end")).split(":"))
+                .limit(2)
+                .map(Integer::valueOf)
+                .toArray(Integer[]::new);
+
+        return new Lesson(id, LocalTime.of(start[0], start[1]), LocalTime.of(end[0], end[1]));
+
     }
 }
