@@ -8,9 +8,7 @@ import java.time.LocalTime;
 import java.util.Arrays;
 
 public class Lesson {
-
-    DateFormat sdf = new SimpleDateFormat("HH:mm");
-
+    
     private int no;
     private LocalTime start;
     private LocalTime end;
@@ -30,7 +28,7 @@ public class Lesson {
     }
 
     public String getStartString() {
-        return sdf.format(start);
+        return start.getHour() + ":" + start.getMinute();
     }
 
     public LocalTime getEnd() {
@@ -38,7 +36,7 @@ public class Lesson {
     }
 
     public String getEndString() {
-        return sdf.format(end);
+        return end.getHour() + ":" + end.getMinute();
     }
 
     public static Lesson newLesson(JSONObject jsonObject) {

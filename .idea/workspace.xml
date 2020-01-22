@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment=".gitignore added, Date changed to LocalTime in Lesson class">
+      <change afterPath="$PROJECT_DIR$/src/main/java/inventory/ui/controllers/TabReservations.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/tab_reservations/tab_reservations.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database.db" beforeDir="false" afterPath="$PROJECT_DIR$/Database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/model/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/model/Inventory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/inventory/model/Lesson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/model/Lesson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/model/Mappable.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/inventory/model/ReservationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/model/ReservationManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/ui/PaneFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/ui/PaneFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/ui/tabs/home/CustomGridPane.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/utils/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/utils/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/utils/JSONUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/utils/JSONUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/inventory/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/ui/ReserveDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/ui/ReserveDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fxml/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/inventory/model/Inventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/inventory/model/Inventory.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/inventory/model/Lesson.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/inventory/model/Lesson.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/inventory/model/Mappable.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/inventory/model/ReservationManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/inventory/model/ReservationManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/PaneFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/inventory/ui/PaneFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/tabs/home/CustomGridPane.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/utils/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/inventory/utils/Database.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/ReserveDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/inventory/ui/ReserveDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/inventory/utils/JSONUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/inventory/utils/JSONUtil.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,8 +274,17 @@
       <workItem from="1576947015130" duration="18550000" />
       <workItem from="1577370686176" duration="54573000" />
       <workItem from="1579173138574" duration="2008000" />
-      <workItem from="1579642872074" duration="2435000" />
+      <workItem from="1579642872074" duration="3245000" />
+      <workItem from="1579688582651" duration="1084000" />
     </task>
+    <task id="LOCAL-00001" summary=".gitignore added, Date changed to LocalTime in Lesson class">
+      <created>1579645767499</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1579645767499</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -284,6 +293,8 @@
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <MESSAGE value=".gitignore added, Date changed to LocalTime in Lesson class" />
+    <option name="LAST_COMMIT_MESSAGE" value=".gitignore added, Date changed to LocalTime in Lesson class" />
   </component>
   <component name="WindowStateProjectService">
     <state x="320" y="115" key="#SQL_Dialects" timestamp="1577366431329">
@@ -298,10 +309,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="428" y="260" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1577367257125" />
-    <state x="533" y="173" key="#com.intellij.ide.util.MemberChooser" timestamp="1578165684513">
+    <state x="533" y="173" key="#com.intellij.ide.util.MemberChooser" timestamp="1579689729236">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="533" y="173" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1578165684513" />
+    <state x="533" y="173" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1579689729236" />
     <state x="437" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1578080236231">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -314,46 +325,50 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="458" y="204" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1440.900@0.0.1440.900" timestamp="1577654175719" />
-    <state width="1398" height="213" key="GridCell.Tab.0.bottom" timestamp="1579645607136">
+    <state x="342" y="52" key="CommitChangelistDialog2" timestamp="1579645766938">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="213" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1579645607136" />
+    <state x="342" y="52" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1579645766938" />
+    <state width="1398" height="213" key="GridCell.Tab.0.bottom" timestamp="1579689768730">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="213" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1579689768730" />
     <state width="1398" height="213" key="GridCell.Tab.0.bottom/0.23.1440.832@0.23.1440.832" timestamp="1578400823687" />
     <state width="1398" height="237" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1577363950752" />
-    <state width="1398" height="213" key="GridCell.Tab.0.center" timestamp="1579645607135">
+    <state width="1398" height="213" key="GridCell.Tab.0.center" timestamp="1579689768729">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="213" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1579645607135" />
+    <state width="1398" height="213" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1579689768729" />
     <state width="1398" height="213" key="GridCell.Tab.0.center/0.23.1440.832@0.23.1440.832" timestamp="1578400823686" />
     <state width="1398" height="237" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1577363950750" />
-    <state width="1398" height="213" key="GridCell.Tab.0.left" timestamp="1579645607134">
+    <state width="1398" height="213" key="GridCell.Tab.0.left" timestamp="1579689768728">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="213" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1579645607134" />
+    <state width="1398" height="213" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1579689768728" />
     <state width="1398" height="213" key="GridCell.Tab.0.left/0.23.1440.832@0.23.1440.832" timestamp="1578400823683" />
     <state width="1398" height="237" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1577363950749" />
-    <state width="1398" height="213" key="GridCell.Tab.0.right" timestamp="1579645607136">
+    <state width="1398" height="213" key="GridCell.Tab.0.right" timestamp="1579689768729">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="213" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1579645607136" />
+    <state width="1398" height="213" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1579689768729" />
     <state width="1398" height="213" key="GridCell.Tab.0.right/0.23.1440.832@0.23.1440.832" timestamp="1578400823686" />
     <state width="1398" height="237" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1577363950751" />
-    <state width="1398" height="303" key="GridCell.Tab.1.bottom" timestamp="1579645284228">
+    <state width="1398" height="303" key="GridCell.Tab.1.bottom" timestamp="1579650740082">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="303" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1579645284228" />
-    <state width="1398" height="303" key="GridCell.Tab.1.center" timestamp="1579645284227">
+    <state width="1398" height="303" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1579650740082" />
+    <state width="1398" height="303" key="GridCell.Tab.1.center" timestamp="1579650740081">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="303" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1579645284227" />
-    <state width="1398" height="303" key="GridCell.Tab.1.left" timestamp="1579645284226">
+    <state width="1398" height="303" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1579650740081" />
+    <state width="1398" height="303" key="GridCell.Tab.1.left" timestamp="1579650740080">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="303" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1579645284226" />
-    <state width="1398" height="303" key="GridCell.Tab.1.right" timestamp="1579645284227">
+    <state width="1398" height="303" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1579650740080" />
+    <state width="1398" height="303" key="GridCell.Tab.1.right" timestamp="1579650740081">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="303" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1579645284227" />
+    <state width="1398" height="303" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1579650740081" />
     <state width="239" height="457" key="HiddenNamespacesPopup" timestamp="1576947134305">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -362,14 +377,22 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="208" y="23" width="1024" height="832" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1577365825799" />
+    <state x="465" y="372" key="VCS.ChangelistChooser" timestamp="1579645812160">
+      <screen x="0" y="23" width="1440" height="830" />
+    </state>
+    <state x="465" y="372" key="VCS.ChangelistChooser/0.23.1440.830@0.23.1440.830" timestamp="1579645812160" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1579645769767">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1579645769767" />
     <state width="720" height="450" key="XDebugger.FullValuePopup" timestamp="1578165587397">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="720" height="450" key="XDebugger.FullValuePopup/0.0.1440.900@0.0.1440.900" timestamp="1578165587397" />
-    <state x="397" y="284" key="com.intellij.ide.util.TipDialog" timestamp="1579642871693">
+    <state x="397" y="284" key="com.intellij.ide.util.TipDialog" timestamp="1579688581601">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="397" y="284" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1579642871693" />
+    <state x="397" y="284" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1579688581601" />
     <state x="426" y="73" key="refactoring.ChangeSignatureDialog" timestamp="1578065819884">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -408,9 +431,29 @@
           <option name="timeStamp" value="142" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/inventory/model/Inventory.java</url>
-          <line>146</line>
-          <option name="timeStamp" value="150" />
+          <url>file://$PROJECT_DIR$/src/main/java/inventory/model/ReservationManager.java</url>
+          <line>161</line>
+          <option name="timeStamp" value="143" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/inventory/model/ReservationManager.java</url>
+          <line>162</line>
+          <option name="timeStamp" value="144" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/inventory/model/ReservationManager.java</url>
+          <line>166</line>
+          <option name="timeStamp" value="145" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/inventory/model/ReservationManager.java</url>
+          <line>169</line>
+          <option name="timeStamp" value="146" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/inventory/model/ReservationManager.java</url>
+          <line>168</line>
+          <option name="timeStamp" value="148" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

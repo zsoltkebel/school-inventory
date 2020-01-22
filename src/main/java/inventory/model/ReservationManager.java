@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -131,15 +132,10 @@ public class ReservationManager {
     }
 
     public Lesson getCurrentLesson() {
-        Date date = new Date(new java.util.Date().getTime());
+        final LocalTime now = LocalTime.now();
 
         return timeTable.stream()
-                .filter(lesson -> {
-                    Date startDate = changeTime(new Date(new java.util.Date().getTime()), lesson.getStartString());
-                    Date endDate = changeTime(new Date(new java.util.Date().getTime()), lesson.getStartString());
-
-                    return date.after(startDate) && date.before(endDate);
-                })
+                .filter(lesson -> now.isAfter(lesson.getStart()) && now.isBefore(lesson.getEnd()))
                 .findFirst()
                 .orElse(null);
     }
@@ -162,15 +158,16 @@ public class ReservationManager {
                 .filter(reservation -> reservation.getItemId() == itemId).collect(Collectors.toList());
     }
 
-    public static Date changeTime(Date date, String time) {
+    public static Date dateWithTime(LocalDate date, LocalTime time) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
         DateFormat dateAndTimeFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm");
 
+        String dateAndTime = dateFormat.format(date) + " " + time.getHour() + ":" +time.getMinute();
         try {
-            return new Date(dateAndTimeFormat.parse(dateFormat.format(date) + " " + time).getTime());
+            return new Date(dateAndTimeFormat.parse(dateAndTime).getTime());
         } catch (ParseException e) {
             e.printStackTrace();
-            return date;
+            return null;
         }
     }
 }

@@ -10,9 +10,6 @@ import javafx.collections.ObservableList;
  */
 public class Inventory {
 
-    public static final String JSON_CATEGORIES_FILE_NAME = "timetable.json";
-    public static final String JSON_ITEMS_FILE_NAME = "items.json";
-
     private static Inventory SINGLE_INVENTORY = null;
 
     public static Inventory getInstance() {
@@ -42,17 +39,6 @@ public class Inventory {
     public ObservableList<Item> getItems() {
         return items;
     }
-
-
-
-//    public void saveCategoriesJSON() {
-////        JSONUtil.saveJSONArray(JSON_CATEGORIES_FILE_NAME, new ArrayList<>(categories));
-//
-//        categories.forEach(category -> Database.getInstance().insertCategory(category));
-//    }
-
-
-
 
     public boolean isExistingCategoryName(String name) {
         return categories.stream().anyMatch(category -> category.getName().equals(name));
@@ -138,17 +124,6 @@ public class Inventory {
         items.set(index, DATABASE.update(Database.TABLE_ITEMS, newItem));
     }
 
-    public void changeItemAvailability(int itemId, boolean available) {
-        Item oldItem = getItem(itemId);
-        if (oldItem == null) return;
-
-        Item newItem = new Item(oldItem);
-
-//        newItem.setAvailability(available);
-
-        updateItem(oldItem, newItem);
-    }
-
     public Category getCategory(int id) {
         if (id < 0) return null;
         return categories.stream()
@@ -169,6 +144,11 @@ public class Inventory {
         return (int) items.stream()
                 .filter(item -> item.getCategoryId() == category.getId())
                 .count();
+    }
+
+    public boolean isItemAvailable(int id) {
+        //TODO itemAvailable
+        return true;
     }
 
 }

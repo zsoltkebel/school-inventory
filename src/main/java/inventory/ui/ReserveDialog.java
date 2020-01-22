@@ -15,7 +15,7 @@ import javafx.util.StringConverter;
 import java.sql.Date;
 import java.time.LocalDate;
 
-import static inventory.model.ReservationManager.changeTime;
+import static inventory.model.ReservationManager.dateWithTime;
 
 public class ReserveDialog extends DialogStage {
 
@@ -115,8 +115,8 @@ public class ReserveDialog extends DialogStage {
         reserveButton.setOnAction(event -> {
             Lesson lesson = lessonComboBox.getValue();
             Reservation reservation = new Reservation(
-                    changeTime(Date.valueOf(datePicker.getValue()), lesson.getStartString()),
-                    changeTime(Date.valueOf(datePicker.getValue()), lesson.getEndString()),
+                    dateWithTime(datePicker.getValue(), lesson.getStart()),
+                    dateWithTime(datePicker.getValue(), lesson.getEnd()),
                     lesson.getNo(),
                     selectedItem.getId(),
                     nameTextField.getText(),
