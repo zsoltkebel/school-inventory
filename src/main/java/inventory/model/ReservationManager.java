@@ -1,9 +1,12 @@
 package inventory.model;
 
+import com.sun.javafx.tools.packager.Log;
 import inventory.utils.Database;
 import inventory.utils.JSONUtil;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -36,6 +39,7 @@ public class ReservationManager {
     private ObservableList<Lesson> timeTable = FXCollections.observableArrayList();
     private ObservableList<Reservation> reservations = FXCollections.observableArrayList();
     private ObservableList<Reservation> activeReservations = FXCollections.observableArrayList();
+    private ObjectProperty<Reservation> selectedReservation = new SimpleObjectProperty<>(null);
 
     private ReservationManager() {
         JSONUtil.readJSONArray("timetable.json", object -> timeTable.add(Lesson.newLesson(object)));
@@ -50,7 +54,18 @@ public class ReservationManager {
 //        startTimeLine();
 
         // if the items change reload the active reservations -> display change on UI
-        Inventory.getInstance().getItems().addListener((ListChangeListener<Item>) c -> loadActiveReservations());
+        Inventory.getInstance().getItems().addListener((ListChangeListener<Item>) c -> {
+            int selectedResId = -1;
+
+            try {
+                selectedResId = getSelectedReservation().getId();
+            } catch (NullPointerException ignored) {}
+
+            loadReservations();
+            loadActiveReservations();
+
+            selectedReservation.setValue(getReservation(selectedResId));
+        });
     }
 
     private void startTimeLine() {
@@ -63,6 +78,7 @@ public class ReservationManager {
     }
 
     private void loadReservations() {
+        reservations.clear();
         reservations.addAll(Database.getInstance().queryAll(Reservation.class, Database.TABLE_RESERVATIONS));
     }
 
@@ -100,7 +116,7 @@ public class ReservationManager {
     }
 
 
-    public List<Reservation> getReservations() {
+    public ObservableList<Reservation> getReservations() {
         return reservations;
     }
 
@@ -162,12 +178,27 @@ public class ReservationManager {
         DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
         DateFormat dateAndTimeFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm");
 
-        String dateAndTime = dateFormat.format(date) + " " + time.getHour() + ":" +time.getMinute();
+        String dateAndTime = date.getYear() + "."
+                + String.format("%02d", date.getMonthValue()) + "."
+                + String.format("%02d", date.getDayOfMonth()) + " "
+                + time.getHour() + ":" +time.getMinute();
         try {
             return new Date(dateAndTimeFormat.parse(dateAndTime).getTime());
         } catch (ParseException e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public Reservation getSelectedReservation() {
+        return selectedReservation.get();
+    }
+
+    public ObjectProperty<Reservation> selectedReservationProperty() {
+        return selectedReservation;
+    }
+
+    public void setSelectedReservation(Reservation selectedReservation) {
+        this.selectedReservation.set(selectedReservation);
     }
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root prefHeight="42.0" prefWidth="200.0" type="javafx.scene.control.ListCell" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <graphic>
+        <VBox fx:id="splitPane">
+            <HBox mouseTransparent="true" prefHeight="NaN">
+                <Label fx:id="labelName" maxWidth="140" text="Name" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="labelTime" alignment="CENTER_RIGHT" text="Time" />
+            </HBox>
+            <Label fx:id="labelComment" text="Comment" />
+        </VBox>
+    </graphic>
+</fx:root>

@@ -5,19 +5,15 @@
 
 <fx:root type="javafx.scene.control.ListCell" stylesheets="/styles/category_item.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <graphic>
-        <SplitPane fx:id="splitPane" dividerPositions="0.75"  mouseTransparent="true">
-            <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" >
-                    <children>
-                        <Label fx:id="categoryNameLabel" text="Label" maxWidth="140" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                    </children>
-                </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0">
-                    <children>
-                        <Label fx:id="numOfItemsLabel" alignment="CENTER_RIGHT" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                    </children>
-                </AnchorPane>
-            </items>
+        <SplitPane fx:id="splitPane" dividerPositions="0.75" mouseTransparent="true">
+            <AnchorPane minHeight="0.0" minWidth="0.0">
+                <Label fx:id="categoryNameLabel" text="Label" maxWidth="140" AnchorPane.bottomAnchor="0.0"
+                       AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0">
+                <Label fx:id="numOfItemsLabel" alignment="CENTER_RIGHT" text="Label" AnchorPane.bottomAnchor="0.0"
+                       AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+            </AnchorPane>
         </SplitPane>
     </graphic>
 </fx:root>

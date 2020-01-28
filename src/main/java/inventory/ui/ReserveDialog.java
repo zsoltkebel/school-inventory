@@ -12,7 +12,6 @@ import javafx.scene.paint.Paint;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 import static inventory.model.ReservationManager.dateWithTime;

@@ -1,6 +1,8 @@
 package inventory.model;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -62,6 +64,15 @@ public class Reservation extends Record<Reservation> {
 
     public Date getEnd() {
         return end;
+    }
+
+    public String getTime() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd. HH:mm");
+        DateFormat timeFormat = new SimpleDateFormat("HH:mm");
+
+        String start = dateFormat.format(this.start);
+        String end = timeFormat.format(this.end);
+        return  start + " - " + end;
     }
 
     public int getLessonId() {
