@@ -1,27 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Inventory:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="use of LocalDate and LocalTime where appropriate instead of sql.Date">
-      <change afterPath="$PROJECT_DIR$/src/main/java/inventory/ui/CustomListCell.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/inventory/ui/controllers/ReservationDetailsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/inventory/ui/controllers/reservations/ReservationCell.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/tab_reservations/reservation_cell.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/tab_reservations/reservation_details.fxml" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="reservation tab displays details&#10;buttons do not work yet">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Inventory_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/model/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/model/Reservation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/model/ReservationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/model/ReservationManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/ui/ReserveDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/ui/ReserveDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/ui/controllers/TabReservations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/ui/controllers/TabReservations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/tab_inventory/category_cell_2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/tab_inventory/category_cell_2.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/tab_reservations/tab_reservations.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/tab_reservations/tab_reservations.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/tab_inventory/category_cell_2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/tab_inventory/category_cell_2.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/model/Reservation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/inventory/model/Reservation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/model/ReservationManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/inventory/model/ReservationManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/ReserveDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/inventory/ui/ReserveDialog$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/ReserveDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/inventory/ui/ReserveDialog$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/ReserveDialog$3$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/inventory/ui/ReserveDialog$3$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/ReserveDialog$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/inventory/ui/ReserveDialog$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/ReserveDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/inventory/ui/ReserveDialog.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,13 +119,14 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="OverrideImplement.combined" value="false" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/fxml" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
@@ -284,7 +273,7 @@
       <workItem from="1579775316841" duration="203000" />
       <workItem from="1579776699811" duration="4310000" />
       <workItem from="1579956312978" duration="3169000" />
-      <workItem from="1580212571683" duration="4374000" />
+      <workItem from="1580212571683" duration="5265000" />
     </task>
     <task id="LOCAL-00001" summary=".gitignore added, Date changed to LocalTime in Lesson class">
       <created>1579645767499</created>
@@ -300,7 +289,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579689855002</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="reservation tab displays details&#10;buttons do not work yet">
+      <created>1580217112069</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1580217112069</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -311,7 +307,8 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <MESSAGE value=".gitignore added, Date changed to LocalTime in Lesson class" />
     <MESSAGE value="use of LocalDate and LocalTime where appropriate instead of sql.Date" />
-    <option name="LAST_COMMIT_MESSAGE" value="use of LocalDate and LocalTime where appropriate instead of sql.Date" />
+    <MESSAGE value="reservation tab displays details&#10;buttons do not work yet" />
+    <option name="LAST_COMMIT_MESSAGE" value="reservation tab displays details&#10;buttons do not work yet" />
   </component>
   <component name="WindowStateProjectService">
     <state x="320" y="115" key="#SQL_Dialects" timestamp="1577366431329">
@@ -330,6 +327,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="533" y="173" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1580213103447" />
+    <state x="457" y="229" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1580217310828">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="457" y="229" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1440.900@0.0.1440.900" timestamp="1580217310828" />
     <state x="437" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1578080236231">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -342,10 +343,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="458" y="204" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1440.900@0.0.1440.900" timestamp="1577654175719" />
-    <state x="342" y="52" key="CommitChangelistDialog2" timestamp="1579689854794">
+    <state x="342" y="52" key="CommitChangelistDialog2" timestamp="1580217863890">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="342" y="52" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1579689854794" />
+    <state x="342" y="52" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1580217863890" />
     <state width="1398" height="215" key="GridCell.Tab.0.bottom" timestamp="1580217055695">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -398,18 +399,18 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="239" height="457" key="HiddenNamespacesPopup/0.0.1440.900@0.0.1440.900" timestamp="1576947134305" />
-    <state x="208" y="23" width="1024" height="832" key="SettingsEditor" timestamp="1577365825799">
+    <state x="208" y="23" width="1024" height="830" key="SettingsEditor" timestamp="1580217337081">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="208" y="23" width="1024" height="832" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1577365825799" />
+    <state x="208" y="23" width="1024" height="830" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1580217337081" />
     <state x="465" y="372" key="VCS.ChangelistChooser" timestamp="1579645812160">
       <screen x="0" y="23" width="1440" height="830" />
     </state>
     <state x="465" y="372" key="VCS.ChangelistChooser/0.23.1440.830@0.23.1440.830" timestamp="1579645812160" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1579689857462">
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1580217113331">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1579689857462" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1580217113331" />
     <state width="720" height="450" key="XDebugger.FullValuePopup" timestamp="1578165587397">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -446,27 +447,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/inventory/model/ReservationManager.java</url>
-          <line>179</line>
+          <line>177</line>
           <option name="timeStamp" value="143" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/inventory/model/ReservationManager.java</url>
-          <line>180</line>
+          <line>178</line>
           <option name="timeStamp" value="144" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/inventory/model/ReservationManager.java</url>
-          <line>187</line>
+          <line>185</line>
           <option name="timeStamp" value="145" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/inventory/model/ReservationManager.java</url>
-          <line>190</line>
+          <line>188</line>
           <option name="timeStamp" value="146" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/inventory/model/ReservationManager.java</url>
-          <line>189</line>
+          <line>187</line>
           <option name="timeStamp" value="148" />
         </line-breakpoint>
       </breakpoints>
