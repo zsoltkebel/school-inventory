@@ -4,11 +4,11 @@ import inventory.model.Inventory;
 import inventory.model.Reservation;
 import inventory.model.ReservationManager;
 import inventory.ui.PaneFactory;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
@@ -20,13 +20,13 @@ import java.util.ResourceBundle;
 public class ReservationDetailsController implements Initializable {
 
     @FXML private VBox vBox;
-    @FXML private Button buttonDelete;
     @FXML private Button buttonSaveChanges;
     @FXML private AnchorPane noSelectedReservationPane;
 
+    @FXML private TextField textFieldName;
     @FXML private TextArea textAreaComment;
 
-    @FXML private Label labelName;
+    private ReservationManager RESERVATION_MANAGER = ReservationManager.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,11 +43,31 @@ public class ReservationDetailsController implements Initializable {
     }
 
     private void setPane(Reservation reservation) {
-        labelName.setText(reservation.getName());
+        textFieldName.setText(reservation.getName());
 
         textAreaComment.setText(reservation.getComment());
 
         Pane pane = PaneFactory.getItemPane(Inventory.getInstance().getItem(reservation.getItemId()));
         vBox.getChildren().set(1, pane);
+    }
+
+    public void onDeleteClicked(ActionEvent actionEvent) {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setHeaderText("Delete Reservation");
+        alert.setContentText("Are you sure you want to delete the selected reservation?");
+        alert.getButtonTypes().clear();
+        alert.getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
+
+        Button yesButton = (Button) alert.getDialogPane().lookupButton(ButtonType.YES);
+        yesButton.setDefaultButton( false );
+
+        Button noButton = (Button) alert.getDialogPane().lookupButton(ButtonType.NO);
+        noButton.setDefaultButton( true );
+
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            RESERVATION_MANAGER.deleteSelected();
+        }
     }
 }

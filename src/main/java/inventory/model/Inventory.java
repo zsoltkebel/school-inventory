@@ -2,7 +2,6 @@ package inventory.model;
 
 import inventory.utils.Database;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 /**
@@ -69,7 +68,7 @@ public class Inventory {
             Item item = items.get(i);
 
             if (item.getCategoryId() == id) {
-                DATABASE.remove(item.getId(), Database.TABLE_ITEMS);
+                DATABASE.delete(item.getId(), Database.TABLE_ITEMS);
                 items.remove(i--);
             }
         }
@@ -77,7 +76,7 @@ public class Inventory {
         // delete category
         categories.removeIf(category -> category.getId() == id);
 
-        DATABASE.remove(id, Database.TABLE_CATEGORIES);
+        DATABASE.delete(id, Database.TABLE_CATEGORIES);
     }
 
     private void loadItems() {
@@ -129,7 +128,7 @@ public class Inventory {
         return categories.stream()
                 .filter(category -> category.getId() == id)
                 .findFirst()
-                .get();
+                .orElse(null);
     }
 
     public Item getItem(int id) {

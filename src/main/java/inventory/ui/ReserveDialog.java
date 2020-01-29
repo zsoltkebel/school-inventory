@@ -92,7 +92,7 @@ public class ReserveDialog extends DialogStage {
                         if (item != null) {
                             this.setText(item.getNo() + ".: " + item.getStartString() + "-" + item.getEndString());
 
-                            if (ReservationManager.getInstance().getReservations(selectedItem, datePicker.getValue())
+                            if (ReservationManager.getInstance().reservationsObservable(selectedItem, datePicker.getValue())
                                     .stream()
                                     .anyMatch(reservation -> reservation.getLessonId() == item.getNo())) {
                                 this.setDisable(true);

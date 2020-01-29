@@ -9,13 +9,13 @@ import java.time.ZoneId;
 
 public class Reservation extends Record<Reservation> {
 
-    public final Date start;
-    public final Date end;
-    public final int lessonId;
-    public final int itemId;
-    public final String name;
-    public final String comment;
-    public boolean returned;
+    private final Date start;
+    private final Date end;
+    private final int lessonId;
+    private final int itemId;
+    private final String name;
+    private final String comment;
+    private boolean returned;
 
     public Reservation(int id, Date start, Date end, int lessonId, int itemId, String name, String comment, boolean returned) {
         super(id);

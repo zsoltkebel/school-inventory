@@ -14,6 +14,8 @@ import java.sql.Date;
 import java.sql.*;
 import java.util.*;
 
+import static inventory.utils.ReflectionUtil.getFields;
+
 public class Database {
 
     // categories ===============================
@@ -72,7 +74,7 @@ public class Database {
         }
     }
 
-    public void remove(int id, String table) {
+    public void delete(int id, String table) {
         String sql = "DELETE FROM " + table + " WHERE id = ?";
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -89,10 +91,9 @@ public class Database {
 
         try {
             PreparedStatement statement = conn.prepareStatement(sql);
-            Field[] fields = record.getClass().getFields();
+            Field[] fields = (Field[]) getFields(record.getClass(), "id").toArray(new Field[0]);;
 
-            // id is the last one and we dont need that
-            for (int i = 0; i < fields.length - 1; i++) {
+            for (int i = 0; i < fields.length; i++) {
                 Field field = fields[i];
                 Method setter = setterMethod(field);
                 Method getter = getterMethod(field);
@@ -116,13 +117,12 @@ public class Database {
     }
 
     public <T extends Record<T>> T update(String tableName, T record) {
-        String sql = SQLiteHelper.getUpdateCommand(tableName, record.getClass());
+        String sql = SQLiteHelper.getUpdateCommand(tableName, record);
 
         try {
             PreparedStatement statement = conn.prepareStatement(sql);
-            Field[] fields = record.getClass().getFields();
+            Field[] fields = getFields(record.getClass(), "id").toArray(new Field[0]);
 
-            // id is the last one and we need that
             for (int i = 0; i < fields.length; i++) {
                 Field field = fields[i];
                 Method setter = setterMethod(field);
@@ -147,18 +147,19 @@ public class Database {
         }
     }
 
+
     /**
-     *
      * @param type
      * @param resultSet
      * @param <T>
      * @return
      */
     public <T extends Record<T>> T constructRecord(Class<T> type, ResultSet resultSet) {
-        List<Field> fields = new ArrayList<>(Arrays.asList(type.getFields()));
+        List<Field> fields = getFields(type);
         List<Object> params = new ArrayList<>();
 
         for (Field field : fields) {
+
             String methodName = "get" + StringUtils.capitalize(getPrimitiveType(field.getType().getName()));
 
             try {
@@ -171,9 +172,6 @@ public class Database {
             }
         }
 
-        fields.add(0, fields.remove(fields.size() - 1)); // move id type to  first
-        params.add(0, params.remove(params.size() - 1)); // move id to first
-
         try {
             Constructor<T> constructor = type.getConstructor(fields.stream()
                     .map(field -> getPrimitiveType(field.getType())).toArray(Class[]::new)
@@ -184,6 +182,7 @@ public class Database {
             return null;
         }
     }
+
 
     public <T extends Record<T>> List<T> queryAll(Class<T> type, String tableName) {
         List<T> records = new ArrayList<>();
@@ -205,27 +204,7 @@ public class Database {
         return records;
     }
 
-    private String getPrimitiveType(String type) {
-        String capitalized = StringUtils.capitalize(type);
-        List<String> types = Arrays.asList("Int", "Boolean", "String", "Long", "Date");
 
-        for (String s : types) {
-            if (capitalized.contains(s)) return s;
-        }
-
-        return null;
-    }
-
-    private Class<?> getPrimitiveType(Class<?> type) {
-        List<Class<?>> types = Arrays.asList(int.class, String.class, boolean.class, Date.class);
-
-        for (Class<?> c : types) {
-            if (type.getSimpleName().contains(c.getSimpleName())
-                    || type.getSimpleName().contains(StringUtils.capitalize(c.getSimpleName()))) return c;
-        }
-
-        return null;
-    }
 
     private Method getterMethod(Field field) {
         String methodName = (Objects.equals(getPrimitiveType(field.getType()), boolean.class)
@@ -250,6 +229,28 @@ public class Database {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private String getPrimitiveType(String type) {
+        String capitalized = StringUtils.capitalize(type);
+        List<String> types = Arrays.asList("Int", "Boolean", "String", "Long", "Date");
+
+        for (String s : types) {
+            if (capitalized.contains(s)) return s;
+        }
+
+        return null;
+    }
+
+    private Class<?> getPrimitiveType(Class<?> type) {
+        List<Class<?>> types = Arrays.asList(int.class, String.class, boolean.class, Date.class);
+
+        for (Class<?> c : types) {
+            if (type.getSimpleName().contains(c.getSimpleName())
+                    || type.getSimpleName().contains(StringUtils.capitalize(c.getSimpleName()))) return c;
+        }
+
+        return null;
     }
 
     private String insertCommand(String table, String... columns) {

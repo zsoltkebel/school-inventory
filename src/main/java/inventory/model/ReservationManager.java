@@ -1,6 +1,5 @@
 package inventory.model;
 
-import com.sun.javafx.tools.packager.Log;
 import inventory.utils.Database;
 import inventory.utils.JSONUtil;
 import javafx.animation.KeyFrame;
@@ -12,10 +11,10 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
 
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -68,6 +67,30 @@ public class ReservationManager {
         });
     }
 
+    public ObservableList<Reservation> reservationsObservable() {
+        return reservations;
+    }
+
+    public List<Reservation> getActiveReservations() {
+        return activeReservations;
+    }
+
+    public ObservableList<Reservation> activeReservationsObservable() {
+        return activeReservations;
+    }
+
+    public Reservation getSelectedReservation() {
+        return selectedReservation.get();
+    }
+
+    public ObjectProperty<Reservation> selectedReservationProperty() {
+        return selectedReservation;
+    }
+
+    public void setSelectedReservation(Reservation selectedReservation) {
+        this.selectedReservation.set(selectedReservation);
+    }
+
     private void startTimeLine() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.minutes(1), event -> {
             System.out.println("this is called every 5 seconds on UI thread");
@@ -116,11 +139,8 @@ public class ReservationManager {
     }
 
 
-    public ObservableList<Reservation> getReservations() {
-        return reservations;
-    }
 
-    public List<Reservation> getReservations(Item item) {
+    public List<Reservation> reservationsObservable(Item item) {
         return reservations.stream()
                 .filter(reservation -> reservation.getItemId() == item.getId())
                 .collect(Collectors.toList());
@@ -133,9 +153,9 @@ public class ReservationManager {
                 .orElse(null);
     }
 
-    public List<Reservation> getReservations(Item item, LocalDate date) {
+    public List<Reservation> reservationsObservable(Item item, LocalDate date) {
         //TODO only watch date not time
-        return getReservations(item).stream()
+        return reservationsObservable(item).stream()
                 .filter(reservation -> reservation.on(date))
                 .collect(Collectors.toList());
     }
@@ -161,15 +181,9 @@ public class ReservationManager {
         reservations.add(reservationWithId);
     }
 
-    public ObservableList<Reservation> getActiveReservationsObservableList() {
-        return activeReservations;
-    }
 
-    public ObservableList<Reservation> getActiveReservations() {
-        return activeReservations;
-    }
 
-    public List<Reservation> getActiveReservations(int itemId) {
+    public List<Reservation> activeReservationsObservable(int itemId) {
         return activeReservations.stream()
                 .filter(reservation -> reservation.getItemId() == itemId).collect(Collectors.toList());
     }
@@ -190,15 +204,16 @@ public class ReservationManager {
         }
     }
 
-    public Reservation getSelectedReservation() {
-        return selectedReservation.get();
+    public void deleteReservation(Reservation reservation) {
+        deleteReservation(reservation.getId());
     }
 
-    public ObjectProperty<Reservation> selectedReservationProperty() {
-        return selectedReservation;
+    private void deleteReservation(int id) {
+        reservationsObservable().removeIf(reservation -> reservation.getId() == id);
+        Database.getInstance().delete(id, Database.TABLE_RESERVATIONS);
     }
 
-    public void setSelectedReservation(Reservation selectedReservation) {
-        this.selectedReservation.set(selectedReservation);
+    public void deleteSelected() {
+        deleteReservation(getSelectedReservation());
     }
 }

@@ -8,8 +8,8 @@ import javafx.beans.property.*;
  */
 public class Category extends Record<Category> {
 
-    public StringProperty name = new SimpleStringProperty();
-    public IntegerProperty numOfItems = new SimpleIntegerProperty(0);
+    private StringProperty name = new SimpleStringProperty();
+    private IntegerProperty numOfItems = new SimpleIntegerProperty(0);
 
     public Category(int id, String name, int numOfItems) {
         super(id);

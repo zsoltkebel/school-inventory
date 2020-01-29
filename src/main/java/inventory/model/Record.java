@@ -2,7 +2,7 @@ package inventory.model;
 
 public abstract class Record<T extends Record<?>> {
 
-    public final int id;
+    private final int id;
 
     public Record(int id) {
         this.id = id;

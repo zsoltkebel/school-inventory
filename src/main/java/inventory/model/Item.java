@@ -1,17 +1,14 @@
 package inventory.model;
 
 import javafx.beans.property.*;
-import org.json.simple.JSONObject;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Item extends Record<Item> {
 
-    public StringProperty name = new SimpleStringProperty();
-    public StringProperty description = new SimpleStringProperty();
-    public IntegerProperty categoryId = new SimpleIntegerProperty();
+    private StringProperty name = new SimpleStringProperty();
+    private StringProperty description = new SimpleStringProperty();
+    private IntegerProperty categoryId = new SimpleIntegerProperty();
 
     public Item(int id, String name, String description, int categoryId) {
         super(id);
@@ -31,10 +28,6 @@ public class Item extends Record<Item> {
     @Override
     public Item withId(int id) {
         return new Item(id, getName(), getDescription(), getCategoryId());
-    }
-
-    public int getId() {
-        return id;
     }
 
     public final StringProperty nameProperty() {
@@ -80,6 +73,6 @@ public class Item extends Record<Item> {
     }
 
     public List<Reservation> getCurrentReservations() {
-        return ReservationManager.getInstance().getActiveReservations(id);
+        return ReservationManager.getInstance().activeReservationsObservable(getId());
     }
 }

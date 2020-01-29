@@ -31,7 +31,7 @@ public class ReservationCell extends CustomListCell<Reservation> {
             return;
         }
 
-        labelName.setText(item.name + item.getId());
+        labelName.setText(item.getName() + item.getId());
         labelComment.setText(item.getComment());
         labelTime.setText(item.getTime());
 

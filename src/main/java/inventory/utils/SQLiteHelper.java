@@ -1,24 +1,25 @@
 package inventory.utils;
 
+import inventory.model.Record;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
 
 import java.lang.reflect.Field;
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static inventory.utils.ReflectionUtil.getFields;
+
 public class SQLiteHelper {
 
-    static String getInitTableCommand(String tableName, Class<?> forClass) {
+    static <T extends Record<T>> String getInitTableCommand(String tableName, Class<T> forClass) {
         String sql = "CREATE TABLE IF NOT EXISTS " + tableName + "(";
 
-        Field[] fields = forClass.getFields();
+        Field[] fields = getFields(forClass).toArray(new Field[0]);
 
         sql += Arrays.stream(fields)
                 .map(field -> field.getName() + " " + getSQLiteDatatypeForClass(field.getType())
@@ -30,8 +31,8 @@ public class SQLiteHelper {
         return sql;
     }
 
-    static String getInsertCommand(String tableName, Class<?> forClass) {
-        String[] columns = Arrays.stream(forClass.getFields())
+    static <T extends Record<T>> String getInsertCommand(String tableName, Class<T> forClass) {
+        String[] columns = getFields(forClass).stream()
                 .map(Field::getName)
                 .filter(s -> !s.equals("id"))
                 .toArray(String[]::new);
@@ -41,15 +42,14 @@ public class SQLiteHelper {
                 + String.join(",", Collections.nCopies(columns.length, "?")) + ")";
     }
 
-    static String getUpdateCommand(String tableName, Class<?> forClass) {
-        String[] columns = Arrays.stream(forClass.getFields())
+    static <T extends Record<T>> String getUpdateCommand(String tableName, T record) {
+        String[] columns = getFields(record.getClass(), "id").stream()
                 .map(Field::getName)
-                .filter(s -> !s.equals("id"))
                 .toArray(String[]::new);
 
         return "UPDATE " + tableName + " SET "
                 + Arrays.stream(columns).map(column -> column + " = ?").collect(Collectors.joining(","))
-                + " WHERE id = ?";
+                + " WHERE id = " + record.getId();
     }
 
     static String getSQLiteDatatypeForClass(Class<?> type) {

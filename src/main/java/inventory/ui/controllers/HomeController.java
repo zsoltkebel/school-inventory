@@ -17,7 +17,7 @@ public class HomeController implements Initializable {
 
     @FXML private GridPane currentReservationsGridPane;
 
-    private ObservableList<Reservation> activeReservations = ReservationManager.getInstance().getActiveReservationsObservableList();
+    private ObservableList<Reservation> activeReservations = ReservationManager.getInstance().activeReservationsObservable();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

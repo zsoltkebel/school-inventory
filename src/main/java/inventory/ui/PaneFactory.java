@@ -57,7 +57,7 @@ public class PaneFactory {
         assert reservationPane != null;
         Label nameLabel = (Label) reservationPane.lookup("#nameLabel");
         Button returnButton = (Button) reservationPane.lookup("#returnButton");
-
+        //TODO display date of the reservation
         returnButton.setOnAction(event -> {
             ReservationManager.getInstance().returnReservation(reservation.getId(), true);
 //            Inventory.getInstance().changeItemAvailability(Inventory.getInstance().getItem(reservation.getItemId()).getId(), true);
