@@ -6,80 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="reservation tab displays details&#10;buttons do not work yet">
-      <change afterPath="$PROJECT_DIR$/src/main/java/inventory/utils/ReflectionUtil.java" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="convert all instance variables in the model clases to private">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/model/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/model/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/model/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/model/Inventory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/model/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/model/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/model/Record.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/model/Record.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/model/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/model/Reservation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/model/ReservationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/model/ReservationManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/ui/PaneFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/ui/PaneFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/ui/ReserveDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/ui/ReserveDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/ui/controllers/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/ui/controllers/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/ui/controllers/ReservationDetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/ui/controllers/ReservationDetailsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/ui/controllers/TabReservations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/ui/controllers/TabReservations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/ui/controllers/reservations/ReservationCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/ui/controllers/reservations/ReservationCell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/utils/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/utils/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/utils/SQLiteHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/utils/SQLiteHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/tab_reservations/reservation_details.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/tab_reservations/reservation_details.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/Inventory.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/Untitled.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/category_cell.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/dialogs/item_creator.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/dialogs/reservation_creator.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/item_pane.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/main.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/reservation_pane.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/tab_home/item_reservation.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/tab_home/tab_home.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/tab_inventory/categories_pane.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/tab_inventory/category_cell_2.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/tab_inventory/item_cell.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/tab_inventory/items_pane.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/tab_inventory/tab_inventory.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/icons/laptop.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/FileIO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/MainController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/TabController_Inventory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/model/Category.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/model/Filter$FilterChangeListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/model/Filter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/model/Inventory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/model/Item.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/model/Lesson.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/model/Record.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/model/Reservation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/model/ReservationManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/DialogStage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/ItemCreatorDialog$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/ItemCreatorDialog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/PaneFactory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/ReserveDialog$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/ReserveDialog$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/ReserveDialog$3$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/ReserveDialog$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/ReserveDialog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/controllers/CategoriesPaneController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/controllers/HomeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/controllers/ItemsPaneController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/tabs/inventory/CategoryCell.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/tabs/inventory/CategoryCellFactory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/tabs/inventory/ItemCell.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/tabs/inventory/ItemCellFactory$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/ui/tabs/inventory/ItemCellFactory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/utils/Database.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/utils/JSONUtil$JSONObjectReadListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/utils/JSONUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/utils/SQLiteHelper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/styles/category_item.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/styles/emphasis.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/styles/panes.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/styles/styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/styles/title.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/type.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -346,7 +274,7 @@
       <workItem from="1580212571683" duration="5697000" />
       <workItem from="1580218288502" duration="863000" />
       <workItem from="1580248186239" duration="477000" />
-      <workItem from="1580315556196" duration="8071000" />
+      <workItem from="1580315556196" duration="8807000" />
     </task>
     <task id="LOCAL-00001" summary=".gitignore added, Date changed to LocalTime in Lesson class">
       <created>1579645767499</created>
@@ -369,7 +297,14 @@
       <option name="project" value="LOCAL" />
       <updated>1580217112069</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="convert all instance variables in the model clases to private">
+      <created>1580324592480</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1580324592480</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -381,7 +316,8 @@
     <MESSAGE value=".gitignore added, Date changed to LocalTime in Lesson class" />
     <MESSAGE value="use of LocalDate and LocalTime where appropriate instead of sql.Date" />
     <MESSAGE value="reservation tab displays details&#10;buttons do not work yet" />
-    <option name="LAST_COMMIT_MESSAGE" value="reservation tab displays details&#10;buttons do not work yet" />
+    <MESSAGE value="convert all instance variables in the model clases to private" />
+    <option name="LAST_COMMIT_MESSAGE" value="convert all instance variables in the model clases to private" />
   </component>
   <component name="WindowStateProjectService">
     <state x="320" y="115" key="#SQL_Dialects" timestamp="1577366431329">
@@ -414,55 +350,57 @@
     </state>
     <state x="437" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1440.900@0.0.1440.900" timestamp="1578080236231" />
     <state x="2217" y="-66" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.1440.830/1440.-66.2560.1057@1440.-66.2560.1057" timestamp="1580317650469" />
-    <state x="458" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1579645471267">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="2254" y="174" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1580325079682">
+      <screen x="1440" y="-66" width="2560" height="1057" />
     </state>
     <state x="458" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1440.900@0.0.1440.900" timestamp="1579645471267" />
+    <state x="2254" y="174" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1440.830/1440.-66.2560.1057@1440.-66.2560.1057" timestamp="1580325079682" />
     <state x="458" y="204" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1577654175719">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="458" y="204" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1440.900@0.0.1440.900" timestamp="1577654175719" />
-    <state x="342" y="52" key="CommitChangelistDialog2" timestamp="1580217863890">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="2048" y="-5" key="CommitChangelistDialog2" timestamp="1580325316085">
+      <screen x="1440" y="-66" width="2560" height="1057" />
     </state>
     <state x="342" y="52" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1580217863890" />
-    <state width="1742" height="177" key="GridCell.Tab.0.bottom" timestamp="1580324197532">
+    <state x="2048" y="-5" key="CommitChangelistDialog2/0.23.1440.830/1440.-66.2560.1057@1440.-66.2560.1057" timestamp="1580325316085" />
+    <state width="1742" height="177" key="GridCell.Tab.0.bottom" timestamp="1580325082292">
       <screen x="1440" y="-66" width="2560" height="1057" />
     </state>
     <state width="1398" height="216" key="GridCell.Tab.0.bottom/0.0.1440.900/-545.-1080.2560.1080@0.0.1440.900" timestamp="1580116027736" />
     <state width="2518" height="267" key="GridCell.Tab.0.bottom/0.0.1440.900/1440.-89.2560.1080@1440.-89.2560.1080" timestamp="1580248817231" />
     <state width="1398" height="303" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1580218283833" />
-    <state width="1742" height="177" key="GridCell.Tab.0.bottom/0.23.1440.830/1440.-66.2560.1057@1440.-66.2560.1057" timestamp="1580324197532" />
+    <state width="1742" height="177" key="GridCell.Tab.0.bottom/0.23.1440.830/1440.-66.2560.1057@1440.-66.2560.1057" timestamp="1580325082292" />
     <state width="1398" height="216" key="GridCell.Tab.0.bottom/0.23.1440.830@0.23.1440.830" timestamp="1580214120406" />
     <state width="1398" height="213" key="GridCell.Tab.0.bottom/0.23.1440.832@0.23.1440.832" timestamp="1578400823687" />
     <state width="1398" height="237" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1577363950752" />
-    <state width="1742" height="177" key="GridCell.Tab.0.center" timestamp="1580324197531">
+    <state width="1742" height="177" key="GridCell.Tab.0.center" timestamp="1580325082291">
       <screen x="1440" y="-66" width="2560" height="1057" />
     </state>
     <state width="1398" height="216" key="GridCell.Tab.0.center/0.0.1440.900/-545.-1080.2560.1080@0.0.1440.900" timestamp="1580116027735" />
     <state width="2518" height="267" key="GridCell.Tab.0.center/0.0.1440.900/1440.-89.2560.1080@1440.-89.2560.1080" timestamp="1580248817230" />
     <state width="1398" height="303" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1580218283832" />
-    <state width="1742" height="177" key="GridCell.Tab.0.center/0.23.1440.830/1440.-66.2560.1057@1440.-66.2560.1057" timestamp="1580324197531" />
+    <state width="1742" height="177" key="GridCell.Tab.0.center/0.23.1440.830/1440.-66.2560.1057@1440.-66.2560.1057" timestamp="1580325082291" />
     <state width="1398" height="216" key="GridCell.Tab.0.center/0.23.1440.830@0.23.1440.830" timestamp="1580214120404" />
     <state width="1398" height="213" key="GridCell.Tab.0.center/0.23.1440.832@0.23.1440.832" timestamp="1578400823686" />
     <state width="1398" height="237" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1577363950750" />
-    <state width="1742" height="177" key="GridCell.Tab.0.left" timestamp="1580324197531">
+    <state width="1742" height="177" key="GridCell.Tab.0.left" timestamp="1580325082290">
       <screen x="1440" y="-66" width="2560" height="1057" />
     </state>
     <state width="1398" height="216" key="GridCell.Tab.0.left/0.0.1440.900/-545.-1080.2560.1080@0.0.1440.900" timestamp="1580116027734" />
     <state width="2518" height="267" key="GridCell.Tab.0.left/0.0.1440.900/1440.-89.2560.1080@1440.-89.2560.1080" timestamp="1580248817229" />
     <state width="1398" height="303" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1580218283831" />
-    <state width="1742" height="177" key="GridCell.Tab.0.left/0.23.1440.830/1440.-66.2560.1057@1440.-66.2560.1057" timestamp="1580324197531" />
+    <state width="1742" height="177" key="GridCell.Tab.0.left/0.23.1440.830/1440.-66.2560.1057@1440.-66.2560.1057" timestamp="1580325082290" />
     <state width="1398" height="216" key="GridCell.Tab.0.left/0.23.1440.830@0.23.1440.830" timestamp="1580214120403" />
     <state width="1398" height="213" key="GridCell.Tab.0.left/0.23.1440.832@0.23.1440.832" timestamp="1578400823683" />
     <state width="1398" height="237" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1577363950749" />
-    <state width="1742" height="177" key="GridCell.Tab.0.right" timestamp="1580324197532">
+    <state width="1742" height="177" key="GridCell.Tab.0.right" timestamp="1580325082291">
       <screen x="1440" y="-66" width="2560" height="1057" />
     </state>
     <state width="1398" height="216" key="GridCell.Tab.0.right/0.0.1440.900/-545.-1080.2560.1080@0.0.1440.900" timestamp="1580116027735" />
     <state width="2518" height="267" key="GridCell.Tab.0.right/0.0.1440.900/1440.-89.2560.1080@1440.-89.2560.1080" timestamp="1580248817231" />
     <state width="1398" height="303" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1580218283833" />
-    <state width="1742" height="177" key="GridCell.Tab.0.right/0.23.1440.830/1440.-66.2560.1057@1440.-66.2560.1057" timestamp="1580324197532" />
+    <state width="1742" height="177" key="GridCell.Tab.0.right/0.23.1440.830/1440.-66.2560.1057@1440.-66.2560.1057" timestamp="1580325082291" />
     <state width="1398" height="216" key="GridCell.Tab.0.right/0.23.1440.830@0.23.1440.830" timestamp="1580214120405" />
     <state width="1398" height="213" key="GridCell.Tab.0.right/0.23.1440.832@0.23.1440.832" timestamp="1578400823686" />
     <state width="1398" height="237" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1577363950751" />
@@ -499,10 +437,11 @@
       <screen x="0" y="23" width="1440" height="830" />
     </state>
     <state x="465" y="372" key="VCS.ChangelistChooser/0.23.1440.830@0.23.1440.830" timestamp="1579645812160" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1580217113331">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="2009" y="157" key="Vcs.Push.Dialog.v2" timestamp="1580324594428">
+      <screen x="1440" y="-66" width="2560" height="1057" />
     </state>
     <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1580217113331" />
+    <state x="2009" y="157" key="Vcs.Push.Dialog.v2/0.23.1440.830/1440.-66.2560.1057@1440.-66.2560.1057" timestamp="1580324594428" />
     <state width="720" height="450" key="XDebugger.FullValuePopup" timestamp="1578165587397">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -511,6 +450,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="503" y="235" key="chooseDestDirectoryDialog/0.0.1440.900@0.0.1440.900" timestamp="1580213050209" />
+    <state x="2270" y="34" width="1584" height="857" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1580324885959">
+      <screen x="1440" y="-66" width="2560" height="1057" />
+    </state>
+    <state x="2270" y="34" width="1584" height="857" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.23.1440.830/1440.-66.2560.1057@1440.-66.2560.1057" timestamp="1580324885959" />
     <state x="2146" y="253" key="com.intellij.ide.util.TipDialog" timestamp="1580315586975">
       <screen x="1440" y="-89" width="2560" height="1080" />
     </state>
@@ -563,72 +506,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/inventory/model/ReservationManager.java</url>
           <line>201</line>
           <option name="timeStamp" value="148" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/inventory/utils/Database.java</url>
-          <line>119</line>
-          <option name="timeStamp" value="168" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/inventory/utils/Database.java</url>
-          <line>107</line>
-          <option name="timeStamp" value="169" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/inventory/utils/Database.java</url>
-          <line>109</line>
-          <option name="timeStamp" value="170" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/inventory/utils/Database.java</url>
-          <line>111</line>
-          <option name="timeStamp" value="171" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/inventory/utils/Database.java</url>
-          <line>114</line>
-          <option name="timeStamp" value="172" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/inventory/utils/Database.java</url>
-          <line>140</line>
-          <option name="timeStamp" value="174" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/inventory/utils/Database.java</url>
-          <line>122</line>
-          <option name="timeStamp" value="175" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/inventory/utils/Database.java</url>
-          <line>123</line>
-          <option name="timeStamp" value="176" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/inventory/utils/Database.java</url>
-          <line>125</line>
-          <option name="timeStamp" value="177" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/inventory/utils/Database.java</url>
-          <line>139</line>
-          <option name="timeStamp" value="178" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/inventory/utils/Database.java</url>
-          <line>88</line>
-          <properties class="inventory.utils.Database" method="insert">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="154" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/inventory/utils/Database.java</url>
-          <line>118</line>
-          <properties class="inventory.utils.Database" method="update">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="155" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
