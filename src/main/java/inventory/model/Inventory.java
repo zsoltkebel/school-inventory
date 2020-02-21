@@ -45,7 +45,7 @@ public class Inventory {
 
     private void loadCategories() {
         categories.clear();
-        categories.addAll(DATABASE.queryAll(Category.class, Database.TABLE_CATEGORIES));
+        categories.addAll(DATABASE.queryAll(Category.class, Database.TABLE_CATEGORIES, false, null));
     }
 
     /**
@@ -81,7 +81,7 @@ public class Inventory {
 
     private void loadItems() {
         items.clear();
-        items.addAll(DATABASE.queryAll(Item.class, Database.TABLE_ITEMS));
+        items.addAll(DATABASE.queryAll(Item.class, Database.TABLE_ITEMS, false, null));
     }
 
     /**

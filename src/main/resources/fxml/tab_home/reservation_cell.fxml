@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root prefHeight="70" prefWidth="200.0" type="javafx.scene.control.ListCell" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <graphic>
+        <HBox fx:id="hBox" alignment="CENTER" spacing="10">
+
+            <Pane fx:id="itemPane"/> <!-- placeholder for item pane -->
+            <VBox fx:id="vBox" HBox.hgrow="ALWAYS">
+                <HBox mouseTransparent="true">
+                    <Label fx:id="labelName" maxWidth="140" text="Name" />
+                    <Region HBox.hgrow="ALWAYS" />
+                </HBox>
+                <Label fx:id="labelComment" text="Comment" />
+            </VBox>
+            <Label text="reservation for:"/>
+            <Label fx:id="labelTime" text="Time" />
+            <Button fx:id="buttonReturn" text="Return"/>
+        </HBox>
+
+    </graphic>
+</fx:root>

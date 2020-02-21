@@ -4,19 +4,27 @@ import inventory.utils.Database;
 import inventory.utils.JSONUtil;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.util.Duration;
 
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,15 +48,19 @@ public class ReservationManager {
     private ObservableList<Reservation> activeReservations = FXCollections.observableArrayList();
     private ObjectProperty<Reservation> selectedReservation = new SimpleObjectProperty<>(null);
 
+    private IntegerProperty limit = new SimpleIntegerProperty(100);
+
+    private Reservation temporary = null;
+
     private ReservationManager() {
         JSONUtil.readJSONArray("timetable.json", object -> timeTable.add(Lesson.newLesson(object)));
+
+        loadReservations();
+        loadActiveReservations();
 
         reservations.addListener((ListChangeListener<Reservation>) c -> {
             loadActiveReservations();
         });
-
-        loadReservations();
-        loadActiveReservations();
 
 //        startTimeLine();
 
@@ -58,13 +70,16 @@ public class ReservationManager {
 
             try {
                 selectedResId = getSelectedReservation().getId();
-            } catch (NullPointerException ignored) {}
+            } catch (NullPointerException ignored) {
+            }
 
             loadReservations();
             loadActiveReservations();
 
             selectedReservation.setValue(getReservation(selectedResId));
         });
+
+        limitProperty().addListener((observable, oldValue, newValue) -> loadReservations());
     }
 
     public ObservableList<Reservation> reservationsObservable() {
@@ -79,16 +94,59 @@ public class ReservationManager {
         return activeReservations;
     }
 
-    public Reservation getSelectedReservation() {
-        return selectedReservation.get();
-    }
-
     public ObjectProperty<Reservation> selectedReservationProperty() {
         return selectedReservation;
     }
 
+    public Reservation getSelectedReservation() {
+        return selectedReservation.get();
+    }
+    // == limit ==
+    public IntegerProperty limitProperty() {
+        return limit;
+    }
+
+    public int getLimit() {
+        return limit.get();
+    }
+
+    public void setLimit(int limit) {
+        limitProperty().set(limit);
+    }
+
     public void setSelectedReservation(Reservation selectedReservation) {
-        this.selectedReservation.set(selectedReservation);
+        Reservation previous = getSelectedReservation();
+        if (previous != null &&
+                selectedReservation != null &&
+                selectedReservation.getId() == previous.getId()) {
+            // do nothing if the same is selected again
+            return;
+        }
+
+        if (previous != null && hasChanged(previous)) {
+            //TODO changed
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Changes have been detected");
+            alert.setContentText("There have been changes in the selected reservation. Do you want to save the changes?");
+            alert.getButtonTypes().clear();
+            alert.getButtonTypes().addAll(ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.YES) {
+                updateSelected();
+            } else if (alert.getResult() == ButtonType.NO) {
+                // do nothing
+                // changes will be discarded
+            } else if (alert.getResult() == ButtonType.CANCEL) {
+                // abort changing selected reservation
+                return;
+            }
+        }
+
+        Reservation reservation = selectedReservation == null ? null : selectedReservation.duplicate();
+        this.selectedReservation.set(reservation);
+
     }
 
     private void startTimeLine() {
@@ -102,11 +160,11 @@ public class ReservationManager {
 
     private void loadReservations() {
         reservations.clear();
-        reservations.addAll(Database.getInstance().queryAll(Reservation.class, Database.TABLE_RESERVATIONS));
+        reservations.addAll(Database.getInstance().queryAll(Reservation.class, Database.TABLE_RESERVATIONS, true, getLimit()));
     }
 
     private void loadActiveReservations() {
-        Date date = new Date(new java.util.Date().getTime());
+        Instant date = Instant.now();
 
         activeReservations.clear();
         activeReservations.addAll(reservations.stream()
@@ -120,15 +178,6 @@ public class ReservationManager {
         reservations.set(index, Database.getInstance().update(Database.TABLE_RESERVATIONS, newReservation));
     }
 
-    public void returnReservation(int reservationId, boolean returned) {
-        Reservation oldReservation = getReservation(reservationId);
-
-        Reservation newReservation = new Reservation(oldReservation);
-
-        newReservation.setReturned(returned);
-
-        updateReservation(oldReservation, newReservation);
-    }
 
     public ObservableList<Lesson> getClassesObservableList() {
         return timeTable;
@@ -137,7 +186,6 @@ public class ReservationManager {
     public List<Lesson> getClasses() {
         return timeTable;
     }
-
 
 
     public List<Reservation> reservationsObservable(Item item) {
@@ -160,11 +208,30 @@ public class ReservationManager {
                 .collect(Collectors.toList());
     }
 
-    public Lesson getLesson(int id) {
-        return timeTable.stream()
-                .filter(lesson -> lesson.getNo() == id)
-                .findFirst()
-                .orElse(null);
+    public List<Reservation> reservationsForSelected() {
+        LocalDate forDate = getSelectedReservation().getDate();
+
+        return reservationsForSelected(forDate);
+    }
+
+    public List<Reservation> reservationsForSelected(LocalDate date) {
+
+        return reservationsFor(getSelectedReservation().getItem(), date).stream()
+                .filter(reservation -> reservation.getId() != getSelectedReservation().getId())
+                .collect(Collectors.toList());
+    }
+
+    public List<Reservation> reservationsFor(Item item, LocalDate date) {
+        //TODO only watch date not time
+        return reservationsFor(item).stream()
+                .filter(reservation -> reservation.on(date))
+                .collect(Collectors.toList());
+    }
+
+    public List<Reservation> reservationsFor(Item item) {
+        return reservationsObservable().stream()
+                .filter(reservation -> reservation.getItemId() == item.getId())
+                .collect(Collectors.toList());
     }
 
     public Lesson getCurrentLesson() {
@@ -178,9 +245,9 @@ public class ReservationManager {
 
     public void insertReservation(Reservation reservation) {
         Reservation reservationWithId = Database.getInstance().insert(Database.TABLE_RESERVATIONS, reservation);
-        reservations.add(reservationWithId);
+        reservations.add(0, reservationWithId);
+        while (reservations.size() > getLimit()) reservations.remove(getLimit());
     }
-
 
 
     public List<Reservation> activeReservationsObservable(int itemId) {
@@ -195,7 +262,7 @@ public class ReservationManager {
         String dateAndTime = date.getYear() + "."
                 + String.format("%02d", date.getMonthValue()) + "."
                 + String.format("%02d", date.getDayOfMonth()) + " "
-                + time.getHour() + ":" +time.getMinute();
+                + time.getHour() + ":" + time.getMinute();
         try {
             return new Date(dateAndTimeFormat.parse(dateAndTime).getTime());
         } catch (ParseException e) {
@@ -204,16 +271,124 @@ public class ReservationManager {
         }
     }
 
-    public void deleteReservation(Reservation reservation) {
-        deleteReservation(reservation.getId());
+    /**
+     * use this method to determine the index of a reservation in the ObservableList
+     *
+     * @param reservation
+     * @return
+     */
+    public int indexOf(Reservation reservation) {
+        if (reservationsObservable().contains(reservation)) {
+            return reservationsObservable().indexOf(reservation);
+        } else {
+            for (int i = 0; i < reservationsObservable().size(); i++) {
+                if (reservation.getId() == reservationsObservable().get(i).getId()) {
+                    return i;
+                }
+            }
+            return -1; // to produce OutOfBoundsException
+        }
     }
 
-    private void deleteReservation(int id) {
+    public int indexOf(Lesson lesson) {
+        if (timeTable.contains(lesson)) {
+            return timeTable.indexOf(lesson);
+        } else if (lesson != null) {
+            for (int i = 0; i < timeTable.size(); i++) {
+                if (lesson.getNo() == timeTable.get(i).getNo()) {
+                    return i;
+                }
+            }
+        }
+        return -1; // to produce OutOfBoundsException
+    }
+
+    private void update(Reservation reservation) {
+        int index = indexOf(reservation);
+        if (index < 0) return;
+        reservationsObservable().set(index, Database.getInstance().update(Database.TABLE_RESERVATIONS, reservation));
+    }
+
+    private void delete(Reservation reservation) {
+        delete(reservation.getId());
+    }
+
+    private void delete(int id) {
         reservationsObservable().removeIf(reservation -> reservation.getId() == id);
         Database.getInstance().delete(id, Database.TABLE_RESERVATIONS);
     }
 
-    public void deleteSelected() {
-        deleteReservation(getSelectedReservation());
+    public void returnReservation(Reservation reservation) {
+        reservation.setReturned(true);
+        update(reservation);
     }
+
+    public void returnSelected() {
+        returnReservation(getSelectedReservation());
+
+    }
+
+    public void updateSelected() {
+        update(getSelectedReservation());
+    }
+
+    public void deleteSelected() {
+        delete(getSelectedReservation());
+    }
+
+    public void unselect() {
+        selectedReservationProperty().setValue(null);
+    }
+
+    public Lesson getLesson(int id) {
+        return timeTable.stream()
+                .filter(lesson -> lesson.getNo() == id)
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Lesson[] getLessons(int... ids) {
+        return Arrays.stream(ids)
+                .mapToObj(this::getLesson)
+                .toArray(Lesson[]::new);
+    }
+
+    public void newReservation(Item item) {
+        temporary = getSelectedReservation() == null ? null : getSelectedReservation().duplicate();
+
+        Reservation newReservation = new Reservation();
+        newReservation.setItemId(item.getId());
+
+        setSelectedReservation(newReservation);
+    }
+
+    public void reloadSelected() {
+        setSelectedReservation(temporary);
+        temporary = null;
+    }
+
+    public void insertNew() {
+        insertReservation(getSelectedReservation());
+        reloadSelected();
+    }
+
+    public boolean isPresent(Reservation reservation) {
+        for (Reservation reservation1 : reservations) {
+            if (reservation1.isTheSame(reservation)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasChanged(Reservation reservation) {
+        for (Reservation reservation1 : reservations) {
+            if (reservation1.getId() == reservation.getId() && !reservation1.isTheSame(reservation)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

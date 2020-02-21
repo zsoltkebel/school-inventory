@@ -1,15 +1,14 @@
 package inventory.utils;
 
+import com.sun.xml.internal.ws.util.StringUtils;
 import inventory.model.Record;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.sql.Date;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.sql.PreparedStatement;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static inventory.utils.ReflectionUtil.getFields;
@@ -56,8 +55,8 @@ public class SQLiteHelper {
         List<Class<?>> integers = Arrays.asList(
                 int.class, Integer.class, IntegerProperty.class,
                 boolean.class, Boolean.class, BooleanProperty.class,
-                Date.class);
-        List<Class<?>> texts = Arrays.asList(String.class, StringProperty.class);
+                Date.class, ObjectProperty.class);
+        List<Class<?>> texts = Arrays.asList(String.class, StringProperty.class, ListProperty.class);
 
         if (integers.contains(type)) {
             return "INTEGER";
@@ -72,5 +71,39 @@ public class SQLiteHelper {
         return "DROP TABLE " + tableName;
     }
 
+    public static String getSQLTypeString(Class<?> forClass) {
+        return StringUtils.capitalize(getSQLType(forClass).getSimpleName());
+    }
 
+    public static Class<?> getSQLType(Class<?> type) {
+        Map<Class<?>, Class<?>> map = new HashMap<Class<?>, Class<?>>() {{
+            put(int.class, int.class);
+            put(IntegerProperty.class, int.class);
+            put(StringProperty.class, String.class);
+            put(BooleanProperty.class, boolean.class);
+            put(ObjectProperty.class, Date.class);
+            put(Date.class, Date.class);
+            put(String.class, String.class);
+            put(boolean.class, boolean.class);
+        }};
+
+        for (Map.Entry<Class<?>, Class<?>> entry : map.entrySet()) {
+            if (entry.getKey().equals(type)) {
+                return entry.getValue();
+            }
+        }
+
+        return null;
+    }
+
+    public static Method statementSetterMethod(Field field) {
+        String methodName = "set" + getSQLTypeString(field.getType());
+
+        try {
+            return PreparedStatement.class.getMethod(methodName, int.class, getSQLType(field.getType()));
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

@@ -2,6 +2,9 @@ package inventory.model;
 
 import javafx.beans.property.*;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  * Category class
  * following tha JavaFX Bean Pattern/Convention

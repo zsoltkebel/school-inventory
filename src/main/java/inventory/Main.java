@@ -1,6 +1,5 @@
 package inventory;
 
-import inventory.model.Inventory;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,8 +8,8 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private static final int MIN_WIDTH = 700;
-    private static final int MIN_HEIGHT = 500;
+    private static final int MIN_WIDTH = 1000;
+    private static final int MIN_HEIGHT = 700;
 
     private static final int PREF_WIDTH = MIN_WIDTH;
     private static final int PREF_HEIGHT = MIN_HEIGHT;
@@ -30,6 +29,7 @@ public class Main extends Application {
 
         primaryStage.setWidth(PREF_WIDTH);
         primaryStage.setHeight(PREF_HEIGHT);
+
     }
 
 

@@ -59,7 +59,7 @@ public class PaneFactory {
         Button returnButton = (Button) reservationPane.lookup("#returnButton");
         //TODO display date of the reservation
         returnButton.setOnAction(event -> {
-            ReservationManager.getInstance().returnReservation(reservation.getId(), true);
+            ReservationManager.getInstance().returnReservation(reservation);
 //            Inventory.getInstance().changeItemAvailability(Inventory.getInstance().getItem(reservation.getItemId()).getId(), true);
         });
 

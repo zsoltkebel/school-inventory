@@ -1,5 +1,7 @@
 package inventory.model;
 
+import java.sql.ResultSet;
+
 public abstract class Record<T extends Record<?>> {
 
     private final int id;

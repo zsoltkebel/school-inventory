@@ -31,8 +31,8 @@ public class ReservationCell extends CustomListCell<Reservation> {
             return;
         }
 
-        labelName.setText(item.getName() + item.getId());
-        labelComment.setText(item.getComment());
+        labelName.textProperty().bind(item.nameProperty());
+        labelComment.textProperty().bind(item.commentProperty());
         labelTime.setText(item.getTime());
 
         setGraphic(splitPane);

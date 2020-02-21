@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
 <?import javafx.geometry.Insets?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="inventory.ui.controllers.HomeController">
-
-    <ScrollPane AnchorPane.leftAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0"
-                AnchorPane.topAnchor="0">
-        <GridPane fx:id="currentReservationsGridPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
-                  hgap="10" vgap="10">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="inventory.ui.tabs.home.HomeController">
+    <VBox AnchorPane.leftAnchor="0" AnchorPane.bottomAnchor="0"
+          AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+        <Label text="Active Reservations">
             <padding><Insets topRightBottomLeft="10"/></padding>
-        </GridPane>
-    </ScrollPane>
+        </Label>
+        <ListView fx:id="listViewCurrentReservations" VBox.vgrow="ALWAYS"/>
+    </VBox>
+
 </AnchorPane>

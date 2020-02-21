@@ -1,12 +1,16 @@
-package inventory.ui.controllers;
+package inventory.ui.tabs.home;
 
 import inventory.model.Reservation;
 import inventory.model.ReservationManager;
 import inventory.ui.PaneFactory;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -15,26 +19,15 @@ import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
 
-    @FXML private GridPane currentReservationsGridPane;
+    @FXML private ListView<Reservation> listViewCurrentReservations;
 
     private ObservableList<Reservation> activeReservations = ReservationManager.getInstance().activeReservationsObservable();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        activeReservations.addListener((ListChangeListener<Reservation>) c -> {
-            initGrid();
-        });
-        initGrid();
-
+        listViewCurrentReservations.setCellFactory(param -> new ReservationCell());
+        listViewCurrentReservations.setItems(ReservationManager.getInstance().activeReservationsObservable());
+        listViewCurrentReservations.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> listViewCurrentReservations.getSelectionModel().clearSelection());
     }
 
-    private void initGrid() {
-        currentReservationsGridPane.getChildren().clear();
-        for (int i = 0; i < activeReservations.size(); i++) {
-            Pane pane = PaneFactory.getReservationPane(activeReservations.get(i));
-
-            currentReservationsGridPane.add(pane, i, 0);
-
-        }
-    }
 }

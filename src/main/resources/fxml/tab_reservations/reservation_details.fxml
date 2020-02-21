@@ -1,31 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TextField?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" minWidth="200" xmlns="http://javafx.com/javafx/10.0.2-internal"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="inventory.ui.controllers.ReservationDetailsController">
-    <StackPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
-               AnchorPane.topAnchor="0">
-<!--    display details    -->
-        <VBox fx:id="vBox" spacing="5">
-            <padding><Insets topRightBottomLeft="5"/></padding>
-            <TextField fx:id="textFieldName" text="Name"/>
-            <Pane/> <!-- placeholder for item pane -->
-            <TextArea fx:id="textAreaComment" maxWidth="Infinity" text="Comment" VBox.vgrow="ALWAYS"/>
-            <HBox spacing="5">
-                <Button onAction="#onDeleteClicked" text="Delete"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Button fx:id="buttonSaveChanges" text="Save Changes"/>
-            </HBox>
-        </VBox>
-<!--    display if there is no selected reservation    -->
-        <AnchorPane fx:id="noSelectedReservationPane" visible="false" style="-fx-background-color: white;">
-            <Label alignment="CENTER" text="Select a reservation" AnchorPane.bottomAnchor="0.0"
-                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-        </AnchorPane>
-    </StackPane>
-</AnchorPane>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<VBox fx:id="vBox" spacing="5" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="inventory.ui.controllers.ReservationDetailsController">
+    <padding>
+        <Insets topRightBottomLeft="5"/>
+    </padding>
+    <Label text="Person taking the reservation:"/>
+    <TextField fx:id="textFieldName" text="Name"/>
+    <Label text="Item:"/>
+    <Pane fx:id="itemPane"/> <!-- placeholder for item pane -->
+    <Label text="For the following date:"/>
+    <DatePicker fx:id="datePicker" maxWidth="Infinity"/>
+    <ComboBox fx:id="lessonComboBox" maxWidth="Infinity" promptText="Select Class"/>
+    <Label text="Comment:"/>
+    <TextArea fx:id="textAreaComment" maxWidth="Infinity" text="Comment" VBox.vgrow="ALWAYS"/>
+</VBox>

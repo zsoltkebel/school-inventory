@@ -16,8 +16,6 @@ import java.io.IOException;
 
 public class ItemCell extends ListCell<Item> {
 
-    Filter filter = Filter.getInstance();
-
     @FXML private Pane cellPane;
 
     @FXML private Label nameLabel;

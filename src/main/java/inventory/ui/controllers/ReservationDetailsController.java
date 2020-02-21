@@ -1,73 +1,123 @@
 package inventory.ui.controllers;
 
 import inventory.model.Inventory;
+import inventory.model.Lesson;
 import inventory.model.Reservation;
 import inventory.model.ReservationManager;
 import inventory.ui.PaneFactory;
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ReservationDetailsController implements Initializable {
 
-    @FXML private VBox vBox;
-    @FXML private Button buttonSaveChanges;
-    @FXML private AnchorPane noSelectedReservationPane;
+    @FXML
+    private ComboBox<Lesson> lessonComboBox;
+    @FXML
+    private DatePicker datePicker;
+    @FXML
+    private Pane itemPane;
+    @FXML
+    private VBox vBox;
+    @FXML
+    private TextField textFieldName;
+    @FXML
+    private TextArea textAreaComment;
 
-    @FXML private TextField textFieldName;
-    @FXML private TextArea textAreaComment;
-
-    private ReservationManager RESERVATION_MANAGER = ReservationManager.getInstance();
+    private int indexOfItemPane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        noSelectedReservationPane.setVisible(ReservationManager.getInstance().getSelectedReservation() == null);
+        textFieldName.requestFocus();
+        indexOfItemPane = vBox.getChildren().indexOf(itemPane);
 
         ReservationManager.getInstance().selectedReservationProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == null) {
-                noSelectedReservationPane.setVisible(true);
-            } else {
-                noSelectedReservationPane.setVisible(false);
+            removeBind(oldValue);
+            if (newValue != null) {
                 setPane(newValue);
             }
+        });
+
+        lessonComboBox.setItems(ReservationManager.getInstance().getClassesObservableList());
+        lessonComboBox.setConverter(new StringConverter<Lesson>() {
+            @Override
+            public String toString(Lesson object) {
+                return ofLesson(object);
+            }
+
+            @Override
+            public Lesson fromString(String string) {
+                return null;
+            }
+        });
+
+        lessonComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                ReservationManager.getInstance().getSelectedReservation().setLessonId(newValue.getNo());
+            }
+        });
+
+        datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            // refresh UI
+            lessonComboBox.setItems(FXCollections.observableArrayList());
+            lessonComboBox.setItems(ReservationManager.getInstance().getClassesObservableList());
         });
     }
 
     private void setPane(Reservation reservation) {
-        textFieldName.setText(reservation.getName());
-
-        textAreaComment.setText(reservation.getComment());
+        textFieldName.textProperty().bindBidirectional(reservation.nameProperty());
+        textAreaComment.textProperty().bindBidirectional(reservation.commentProperty());
+        datePicker.valueProperty().bindBidirectional(reservation.dateProperty());
+        lessonComboBox.getSelectionModel().select(ReservationManager.getInstance().indexOf(reservation.getLesson()));
 
         Pane pane = PaneFactory.getItemPane(Inventory.getInstance().getItem(reservation.getItemId()));
-        vBox.getChildren().set(1, pane);
+        vBox.getChildren().set(indexOfItemPane, pane);
+
+        // setting already reserved dates to be unavailable to select
+        lessonComboBox.setCellFactory(new Callback<ListView<Lesson>, ListCell<Lesson>>() {
+            @Override
+            public ListCell<Lesson> call(ListView<Lesson> param) {
+                return new ListCell<Lesson>() {
+                    @Override
+                    protected void updateItem(Lesson item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if (item != null) {
+                            this.setText(ofLesson(item));
+
+                            if (ReservationManager.getInstance().reservationsForSelected(datePicker.getValue()).stream()
+                                    .anyMatch(reservation -> reservation.getLessonId() == item.getNo())) {
+                                this.setDisable(true);
+                                this.setTextFill(Paint.valueOf("#C0C0C0"));
+                            } else {
+                                this.setDisable(false);
+                                this.setTextFill(Paint.valueOf("#000000"));
+                            }
+                        }
+                    }
+                };
+            }
+        });
     }
 
-    public void onDeleteClicked(ActionEvent actionEvent) {
-        Alert alert = new Alert(AlertType.WARNING);
-        alert.setHeaderText("Delete Reservation");
-        alert.setContentText("Are you sure you want to delete the selected reservation?");
-        alert.getButtonTypes().clear();
-        alert.getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
+    private void removeBind(Reservation reservation) {
+        try {
+            textFieldName.textProperty().unbindBidirectional(reservation.nameProperty());
+            textAreaComment.setText(reservation.getComment());
+            datePicker.setValue(reservation.getDate());
+        } catch (NullPointerException ignored) {}
+    }
 
-        Button yesButton = (Button) alert.getDialogPane().lookupButton(ButtonType.YES);
-        yesButton.setDefaultButton( false );
-
-        Button noButton = (Button) alert.getDialogPane().lookupButton(ButtonType.NO);
-        noButton.setDefaultButton( true );
-
-        alert.showAndWait();
-
-        if (alert.getResult() == ButtonType.YES) {
-            RESERVATION_MANAGER.deleteSelected();
-        }
+    private String ofLesson(Lesson lesson) {
+        return lesson.getNo() + ". class: " + lesson.getStartString() + " - " + lesson.getEndString();
     }
 }

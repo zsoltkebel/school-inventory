@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <VBox fx:controller="inventory.ui.controllers.ItemsPaneController" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml" alignment="CENTER_LEFT" prefWidth="200">
-    <padding><Insets topRightBottomLeft="5"/></padding>
+    <padding>
+        <Insets topRightBottomLeft="5"/>
+    </padding>
     <HBox alignment="CENTER_LEFT">
         <Label text="Items" stylesheets="/styles/title.css"/>
         <Button fx:id="addButton" text="New" onAction="#handleAddButtonAction" maxWidth="1.7976931348623157E308"/>
@@ -19,7 +19,7 @@
             <Button fx:id="clearFilterButton" text="Show All" onAction="#handleClearFilterButtonAction"/>
         </HBox>
     </HBox>
-    <ListView fx:id="itemListView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+    <ListView fx:id="itemListView" VBox.vgrow="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER"/>
 </VBox>
 

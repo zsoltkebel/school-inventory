@@ -11,7 +11,7 @@
         <Button fx:id="addButton" text="New" onAction="#handleButtonAction" maxWidth="1.7976931348623157E308"/>
     </HBox>
 
-    <ListView fx:id="listView"
+    <ListView fx:id="listView" VBox.vgrow="ALWAYS"
               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER"/>
 

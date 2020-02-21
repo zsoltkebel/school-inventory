@@ -5,16 +5,18 @@ import inventory.model.Category;
 import inventory.model.Item;
 import inventory.model.Record;
 import inventory.model.Reservation;
+import javafx.beans.property.ListProperty;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.sql.Date;
 import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 
 import static inventory.utils.ReflectionUtil.getFields;
+import static inventory.utils.SQLiteHelper.*;
 
 public class Database {
 
@@ -95,7 +97,7 @@ public class Database {
 
             for (int i = 0; i < fields.length; i++) {
                 Field field = fields[i];
-                Method setter = setterMethod(field);
+                Method setter = statementSetterMethod(field);
                 Method getter = getterMethod(field);
 
                 try {
@@ -125,7 +127,7 @@ public class Database {
 
             for (int i = 0; i < fields.length; i++) {
                 Field field = fields[i];
-                Method setter = setterMethod(field);
+                Method setter = statementSetterMethod(field);
                 Method getter = getterMethod(field);
 
                 try {
@@ -147,47 +149,32 @@ public class Database {
         }
     }
 
-
     /**
+     * @param <T>
      * @param type
      * @param resultSet
-     * @param <T>
      * @return
      */
-    public <T extends Record<T>> T constructRecord(Class<T> type, ResultSet resultSet) {
-        List<Field> fields = getFields(type);
-        List<Object> params = new ArrayList<>();
-
-        for (Field field : fields) {
-
-            String methodName = "get" + StringUtils.capitalize(getPrimitiveType(field.getType().getName()));
-
-            try {
-                Method method = ResultSet.class.getMethod(methodName, String.class);
-
-                params.add(method.invoke(resultSet, field.getName()));
-            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
+    public <T extends Record<?>> T constructRecord(Class<T> type, ResultSet resultSet) {
         try {
-            Constructor<T> constructor = type.getConstructor(fields.stream()
-                    .map(field -> getPrimitiveType(field.getType())).toArray(Class[]::new)
-            );
-            return constructor.newInstance(params.toArray());
-        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
+            Method method = Factory.class.getMethod("new" + type.getSimpleName(), ResultSet.class);
+
+            Object newInstance = method.invoke(Factory.class, resultSet);
+            if (type.isInstance(newInstance)) {
+                return (T) newInstance;
+            }
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
-            return null;
         }
+        return null;
     }
 
 
-    public <T extends Record<T>> List<T> queryAll(Class<T> type, String tableName) {
+    public <T extends Record<T>> List<T> queryAll(Class<T> type, String tableName, boolean descending, Integer limit) {
         List<T> records = new ArrayList<>();
 
-        String sql = "SELECT * FROM " + tableName;
+        String sql = "SELECT * FROM " + tableName + " ORDER BY id " + (descending ? "DESC" : "ASC");
+        if (limit != null) sql += " LIMIT " + limit;
 
         try {
             Statement stmt = conn.createStatement();
@@ -204,13 +191,24 @@ public class Database {
         return records;
     }
 
+    private String insertCommand(String table, String... columns) {
+        return "INSERT INTO "
+                + table + "(" + String.join(",", columns) + ") VALUES("
+                + String.join(",", Collections.nCopies(columns.length, "?")) + ")";
+    }
 
-
-    private Method getterMethod(Field field) {
-        String methodName = (Objects.equals(getPrimitiveType(field.getType()), boolean.class)
+    private static Method getterMethod(Field field) {
+        String methodName = (Objects.equals(getSQLType(field.getType()), boolean.class)
                 ? "is"
                 : "get")
                 + StringUtils.capitalize(field.getName());
+
+        //ending
+        if (Objects.equals(getSQLType(field.getType()), Date.class)) {
+            methodName += "SQL";
+        } else if (Objects.equals(field.getType(), ListProperty.class)) {
+            methodName += "String";
+        }
 
         try {
             return field.getDeclaringClass().getMethod(methodName);
@@ -219,45 +217,5 @@ public class Database {
             return null;
         }
     }
-
-    private Method setterMethod(Field field) {
-        String methodName = "set" + getPrimitiveType(field.getType().getName());
-
-        try {
-            return PreparedStatement.class.getMethod(methodName, int.class, getPrimitiveType(field.getType()));
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    private String getPrimitiveType(String type) {
-        String capitalized = StringUtils.capitalize(type);
-        List<String> types = Arrays.asList("Int", "Boolean", "String", "Long", "Date");
-
-        for (String s : types) {
-            if (capitalized.contains(s)) return s;
-        }
-
-        return null;
-    }
-
-    private Class<?> getPrimitiveType(Class<?> type) {
-        List<Class<?>> types = Arrays.asList(int.class, String.class, boolean.class, Date.class);
-
-        for (Class<?> c : types) {
-            if (type.getSimpleName().contains(c.getSimpleName())
-                    || type.getSimpleName().contains(StringUtils.capitalize(c.getSimpleName()))) return c;
-        }
-
-        return null;
-    }
-
-    private String insertCommand(String table, String... columns) {
-        return "INSERT INTO "
-                + table + "(" + String.join(",", columns) + ") VALUES("
-                + String.join(",", Collections.nCopies(columns.length, "?")) + ")";
-    }
-
 
 }
