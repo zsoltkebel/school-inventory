@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="inventory.ui.tabs.reservations.DialogExportController">
+    <padding><Insets topRightBottomLeft="5"/></padding>
+    <GridPane alignment="CENTER" hgap="5" vgap="5"
+            AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <Label text="From" GridPane.rowIndex="0"/>
+        <DatePicker fx:id="datePickerStart" GridPane.rowIndex="1"/>
+        <Label text="To" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <DatePicker fx:id="datePickerEnd" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <HBox GridPane.rowIndex="2" GridPane.columnSpan="2" alignment="CENTER_LEFT" spacing="5">
+            <Button text="Select" onAction="#onSelectPathClicked"/>
+            <Label fx:id="labelPath" text="No selected directory" HBox.hgrow="ALWAYS"/>
+        </HBox>
+        <Button fx:id="buttonExport" GridPane.rowIndex="3" GridPane.columnSpan="2" maxWidth="Infinity" text="Export" onAction="#onExportClicked"/>
+        <Button GridPane.rowIndex="4" GridPane.columnSpan="2" maxWidth="Infinity" text="Cancel" onAction="#onCancelClicked"/>
+    </GridPane>
+</AnchorPane>

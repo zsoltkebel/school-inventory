@@ -3,8 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane fx:id="dialogRoot" prefWidth="300" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            maxHeight="Infinity">
+<AnchorPane prefWidth="300" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            maxHeight="Infinity" fx:controller="inventory.ui.tabs.inventory.DialogNewItemController">
     <padding>
         <Insets topRightBottomLeft="10"/>
     </padding>
@@ -17,8 +17,8 @@
                   VBox.vgrow="ALWAYS"/>
         <ComboBox fx:id="categoryComboBox" prefWidth="150.0" maxWidth="Infinity" promptText="Select Category"/>
         <HBox spacing="5">
-            <Button fx:id="cancelButton" text="Cancel"/>
-            <Button fx:id="doneButton" text="Add" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS"/>
+            <Button onAction="#onCancelClicked" text="Cancel"/>
+            <Button fx:id="doneButton" onAction="#onSaveClicked" text="Add" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS"/>
         </HBox>
     </VBox>
 </AnchorPane>

@@ -8,8 +8,6 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -24,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,7 +45,14 @@ public class ReservationManager {
     private ObservableList<Lesson> timeTable = FXCollections.observableArrayList();
     private ObservableList<Reservation> reservations = FXCollections.observableArrayList();
     private ObservableList<Reservation> activeReservations = FXCollections.observableArrayList();
+    private ObservableList<Reservation> filteredReservations = FXCollections.observableArrayList();
     private ObjectProperty<Reservation> selectedReservation = new SimpleObjectProperty<>(null);
+
+    private String filterName = null;
+    private int[] filterCategoryIds = Inventory.getInstance().getCategories()
+            .stream()
+            .mapToInt(Category::getId)
+            .toArray();
 
     private IntegerProperty limit = new SimpleIntegerProperty(100);
 
@@ -58,8 +64,10 @@ public class ReservationManager {
         loadReservations();
         loadActiveReservations();
 
+        // every  time the original list changes update the other lists based on the original data
         reservations.addListener((ListChangeListener<Reservation>) c -> {
             loadActiveReservations();
+            filter(filterName, filterCategoryIds);
         });
 
 //        startTimeLine();
@@ -80,6 +88,9 @@ public class ReservationManager {
         });
 
         limitProperty().addListener((observable, oldValue, newValue) -> loadReservations());
+
+        filter(filterName, filterCategoryIds);
+
     }
 
     public ObservableList<Reservation> reservationsObservable() {
@@ -90,8 +101,12 @@ public class ReservationManager {
         return activeReservations;
     }
 
-    public ObservableList<Reservation> activeReservationsObservable() {
+    public ObservableList<Reservation> activeReservations() {
         return activeReservations;
+    }
+
+    public ObservableList<Reservation> filteredReservations() {
+        return filteredReservations;
     }
 
     public ObjectProperty<Reservation> selectedReservationProperty() {
@@ -101,6 +116,7 @@ public class ReservationManager {
     public Reservation getSelectedReservation() {
         return selectedReservation.get();
     }
+
     // == limit ==
     public IntegerProperty limitProperty() {
         return limit;
@@ -250,7 +266,7 @@ public class ReservationManager {
     }
 
 
-    public List<Reservation> activeReservationsObservable(int itemId) {
+    public List<Reservation> activeReservations(int itemId) {
         return activeReservations.stream()
                 .filter(reservation -> reservation.getItemId() == itemId).collect(Collectors.toList());
     }
@@ -390,5 +406,26 @@ public class ReservationManager {
         return false;
     }
 
+    public void filter(String name, int... categoryIds) {
+        filterName = name;
+        filterCategoryIds = categoryIds;
+        List<Integer> ids = new ArrayList<>();
+        for (int categoryId : categoryIds) {
+            ids.add(categoryId);
+        }
+
+        filteredReservations.clear();
+        reservationsObservable().stream()
+                .filter(reservation -> (name == null || reservation.getName().contains(name))
+                        && ids.contains(reservation.getItem().getCategoryId()))
+                .forEach(filteredReservations::add);
+    }
+
+    public void clearFilter() {
+        filter(null, Inventory.getInstance().getCategories()
+                .stream()
+                .mapToInt(Category::getId)
+                .toArray());
+    }
 
 }

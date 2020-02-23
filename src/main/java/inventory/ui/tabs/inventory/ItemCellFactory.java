@@ -1,7 +1,6 @@
 package inventory.ui.tabs.inventory;
 
 import inventory.model.Item;
-import inventory.ui.ItemCreatorDialog;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ContextMenu;

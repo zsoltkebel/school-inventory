@@ -29,9 +29,7 @@ public class Main extends Application {
 
         primaryStage.setWidth(PREF_WIDTH);
         primaryStage.setHeight(PREF_HEIGHT);
-
     }
-
 
     public static void main(String[] args) {
         launch(args);

@@ -2,8 +2,6 @@ package inventory.model;
 
 import javafx.beans.property.*;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 public class Item extends Record<Item> {
@@ -75,6 +73,6 @@ public class Item extends Record<Item> {
     }
 
     public List<Reservation> getCurrentReservations() {
-        return ReservationManager.getInstance().activeReservationsObservable(getId());
+        return ReservationManager.getInstance().activeReservations(getId());
     }
 }

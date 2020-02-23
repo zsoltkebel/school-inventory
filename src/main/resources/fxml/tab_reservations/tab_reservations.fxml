@@ -6,19 +6,30 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Button?>
 <AnchorPane prefHeight="412.0" prefWidth="516.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="inventory.ui.tabs.reservations.ReservationsController">
     <padding>
         <Insets topRightBottomLeft="5"/>
     </padding>
     <VBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
-          AnchorPane.topAnchor="0">
+          AnchorPane.topAnchor="0" spacing="5">
         <HBox maxWidth="Infinity" alignment="CENTER_LEFT">
             <padding>
                 <Insets topRightBottomLeft="5"/>
             </padding>
             <Label text="Number of displayed reservations: "/>
             <Spinner fx:id="spinnerLimit"/>
+        </HBox>
+        <HBox spacing="5">
+            <TextField fx:id="textFieldName" promptText="Name"/>
+            <ComboBox fx:id="comboBoxCategory" promptText="Category"/>
+            <Button text="Filter" prefWidth="100" onAction="#onFilterClicked"/>
+            <Button text="Show All" onAction="#onClearFilterClicked"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Export Data to Excel" onAction="#onExportClicked"/>
         </HBox>
         <SplitPane dividerPositions="0.6" VBox.vgrow="ALWAYS">
             <ListView fx:id="reservationsListView" minWidth="300"/>

@@ -37,7 +37,7 @@ public class PaneFactory {
         Label descriptionLabel = (Label) itemPane.lookup("#descriptionLabel");
         Label categoryLabel = (Label) itemPane.lookup("#categoryLabel");
 
-        itemPane.setBackground(new Background(new BackgroundFill(color, new CornerRadii(5), Insets.EMPTY)));
+//        itemPane.setBackground(new Background(new BackgroundFill(color, new CornerRadii(5), Insets.EMPTY)));
 
         nameLabel.textProperty().bind(item.nameProperty());
         descriptionLabel.setText(item.getDescription());

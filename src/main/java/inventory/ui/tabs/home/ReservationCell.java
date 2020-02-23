@@ -5,12 +5,12 @@ import inventory.model.Reservation;
 import inventory.model.ReservationManager;
 import inventory.ui.CustomListCell;
 import inventory.ui.PaneFactory;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 public class ReservationCell extends CustomListCell<Reservation> {
 
@@ -45,6 +45,7 @@ public class ReservationCell extends CustomListCell<Reservation> {
         Pane pane = PaneFactory.getItemPane(Inventory.getInstance().getItem(reservation.getItemId()));
         itemPane.getChildren().clear();
         itemPane.getChildren().add(pane);
+//        itemPane.getChildren().add(new Label(reservation.getName()));
 
         labelName.textProperty().bind(reservation.nameProperty());
         labelComment.textProperty().bind(reservation.commentProperty());

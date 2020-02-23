@@ -1,9 +1,8 @@
 package inventory.ui;
 
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -14,30 +13,41 @@ import java.io.IOException;
  */
 abstract public class DialogStage extends Stage {
 
-    @FXML Pane dialogRoot;
+    private FXMLLoader fxmlLoader;
 
-    abstract FXMLLoader getFXMLLoader();
+    protected abstract String getFXMLName();
 
     public DialogStage() {
-        FXMLLoader fxmlLoader = getFXMLLoader();
-        fxmlLoader.setController(this);
+        fxmlLoader = new FXMLLoader(getClass().getResource(getFXMLName()));
+
         try {
-            fxmlLoader.load();
+            Parent parent = fxmlLoader.load();
+
+            Scene scene = new Scene(parent, 300, 200);
+            this.initModality(Modality.APPLICATION_MODAL);
+            this.setScene(scene);
+
+            this.setTitle(getDialogTitle());
+
+            // default min values
+            setMinWidth(200);
+            setMinHeight(250);
+
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
-
-        initModality(Modality.APPLICATION_MODAL);
-        setTitle(getDialogTitle());
-        setScene(new Scene(dialogRoot));
-
-        // default values
-        setMinWidth(200);
-        setMinHeight(250);
     }
 
-    String getDialogTitle() {
+    public<T> T getController() {
+        return fxmlLoader.getController();
+    }
+
+    public void openDialog() {
+        this.showAndWait();
+    }
+
+    public String getDialogTitle() {
         return "Dialog";
     }
 }

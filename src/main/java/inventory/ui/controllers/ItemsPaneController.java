@@ -4,7 +4,7 @@ import inventory.model.Category;
 import inventory.model.Inventory;
 import inventory.model.Item;
 import inventory.model.Filter;
-import inventory.ui.ItemCreatorDialog;
+import inventory.ui.tabs.inventory.ItemCreatorDialog;
 import inventory.ui.tabs.inventory.ItemCellFactory;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;

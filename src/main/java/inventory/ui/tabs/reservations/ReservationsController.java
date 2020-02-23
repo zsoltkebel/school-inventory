@@ -1,16 +1,20 @@
 package inventory.ui.tabs.reservations;
 
-import inventory.model.Reservation;
-import inventory.model.ReservationManager;
+import inventory.model.*;
 import inventory.ui.controllers.reservations.ReservationCell;
+import inventory.utils.ExcelGenerator;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Paint;
+import javafx.stage.DirectoryChooser;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -18,6 +22,8 @@ import static javafx.scene.input.KeyEvent.KEY_PRESSED;
 
 public class ReservationsController implements Initializable {
 
+    @FXML private ComboBox<Category> comboBoxCategory;
+    @FXML private TextField textFieldName;
     @FXML
     private Spinner<Integer> spinnerLimit;
     @FXML
@@ -26,7 +32,7 @@ public class ReservationsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         reservationsListView.setCellFactory(param -> new ReservationCell());
-        reservationsListView.setItems(ReservationManager.getInstance().reservationsObservable());
+        reservationsListView.setItems(ReservationManager.getInstance().filteredReservations());
 
         reservationsListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         reservationsListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -44,6 +50,7 @@ public class ReservationsController implements Initializable {
             }
         });
 
+        // limit of displayed reservations
         spinnerLimit.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, ReservationManager.getInstance().getLimit()));
         spinnerLimit.setEditable(true);
         spinnerLimit.valueProperty().addListener((observable, oldValue, newValue) -> ReservationManager.getInstance().setLimit(newValue));
@@ -56,5 +63,58 @@ public class ReservationsController implements Initializable {
                 }
             }
         });
+
+        // filtering category selector
+        comboBoxCategory.setCellFactory(new Callback<ListView<Category>, ListCell<Category>>() {
+            @Override
+            public ListCell<Category> call(ListView<Category> param) {
+                return new ListCell<Category>() {
+                    @Override
+                    protected void updateItem(Category item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if (item != null) {
+                            this.setText(item.getName());
+                        }
+                    }
+                };
+            }
+        });
+        comboBoxCategory.setConverter(new StringConverter<Category>() {
+            @Override
+            public String toString(Category object) {
+                return object.getName();
+            }
+
+            @Override
+            public Category fromString(String string) {
+                return null;
+            }
+        });
+        comboBoxCategory.setItems(Inventory.getInstance().getCategories());
+
+    }
+
+    public void onFilterClicked(ActionEvent actionEvent) {
+        String name = textFieldName.getText();
+        int[] selectedIds = comboBoxCategory.getSelectionModel().getSelectedItem() != null
+                ? new int[]{comboBoxCategory.getSelectionModel().getSelectedItem().getId()}
+                : Inventory.getInstance().getCategories()
+                    .stream()
+                    .mapToInt(Category::getId)
+                    .toArray();
+
+        ReservationManager.getInstance().filter(name, selectedIds);
+    }
+
+    public void onClearFilterClicked(ActionEvent actionEvent) {
+        textFieldName.setText(null);
+        comboBoxCategory.getSelectionModel().clearSelection();
+        ReservationManager.getInstance().clearFilter();
+    }
+
+    public void onExportClicked(ActionEvent actionEvent) {
+        ExportDialog dialog = new ExportDialog();
+        dialog.showAndWait();
     }
 }

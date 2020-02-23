@@ -13,6 +13,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.*;
 import java.sql.Date;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 
 import static inventory.utils.ReflectionUtil.getFields;
@@ -183,6 +186,32 @@ public class Database {
             // loop through the result set
             while (rs.next()) {
                 records.add(constructRecord(type, rs));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return records;
+    }
+
+    public List<Reservation> queryAll(LocalDate from, LocalDate to, boolean descending, Integer limit) {
+        List<Reservation> records = new ArrayList<>();
+
+        Instant instantFrom = from.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        Instant instantTo = to.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        String sql = "SELECT * FROM " + TABLE_RESERVATIONS
+                + " WHERE date BETWEEN " + instantFrom.toEpochMilli() + " AND " + instantTo.toEpochMilli()
+                + " ORDER BY date " + (descending ? "DESC" : "ASC");
+
+        if (limit != null) sql += " LIMIT " + limit;
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            // loop through the result set
+            while (rs.next()) {
+                records.add(Factory.newReservation(rs));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
