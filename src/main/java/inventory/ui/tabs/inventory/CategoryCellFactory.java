@@ -3,15 +3,17 @@ package inventory.ui.tabs.inventory;
 import inventory.model.Category;
 import inventory.model.Filter;
 import inventory.model.Inventory;
+import inventory.model.Item;
 import inventory.utils.Database;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.ObjectProperty;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class CategoryCellFactory implements Callback<ListView<Category>, ListCell<Category>> {
 
@@ -24,14 +26,8 @@ public class CategoryCellFactory implements Callback<ListView<Category>, ListCel
 
         ContextMenu contextMenu = new ContextMenu();
 
-        ObjectProperty<Category> category = categoryCell.itemProperty();
-
         MenuItem editItem = new MenuItem();
-        if (category.getValue() != null)
-        editItem.textProperty().bind(Bindings.format("Edit \"%s\"", category.getValue().nameProperty()));
-//            editItem.setText("Rename");
-//                editItem.textProperty().bind(Bindings.format("Edit %s", category.getName()));
-
+        editItem.setText("Edit");
         editItem.setOnAction(event -> {
             // code to edit item...
             Category cat = categoryCell.getItem();
@@ -66,14 +62,44 @@ public class CategoryCellFactory implements Callback<ListView<Category>, ListCel
         });
 
         MenuItem deleteItem = new MenuItem();
-//                deleteItem.textProperty().bind(Bindings.format("Delete \"%s\"", ((Category) category.getValue()).getName()));
-        deleteItem.setText("delete");
+        deleteItem.setText("Delete");
         deleteItem.setOnAction(event -> {
             Category categoryToDelete = categoryCell.getItem();
-            // delete category
-            inventory.removeCategory(categoryToDelete.getId());
 
-            filter.clear();
+            // confirmation dialog
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Delete category");
+            alert.setHeaderText(categoryToDelete.getName());
+            String content = "Are you sure you want to delete the selected category?" +
+                    "\nAll items belonging to this category ar going to be deleted as well.";
+            String items = Arrays.stream(inventory.getItems(categoryToDelete.getId()))
+                    .map(Item::getName)
+                    .collect(Collectors.joining(", "));
+
+            if (items.length() > 0) {
+                content += "\nItems affected: " + items;
+            } else {
+                content += "No items are belonging to this category.";
+            }
+
+            alert.setContentText(content);
+            alert.getButtonTypes().clear();
+            alert.getButtonTypes().addAll(ButtonType.YES, ButtonType.CANCEL);
+
+            Button yesButton = (Button) alert.getDialogPane().lookupButton(ButtonType.YES);
+            yesButton.setDefaultButton(false);
+
+            Button noButton = (Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL);
+            noButton.setDefaultButton(true);
+
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.YES) {
+                // delete category
+                inventory.removeCategory(categoryToDelete.getId());
+
+                filter.clear();
+            }
         });
         contextMenu.getItems().addAll(editItem, deleteItem);
 

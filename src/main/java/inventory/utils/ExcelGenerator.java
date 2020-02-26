@@ -3,8 +3,9 @@ package inventory.utils;
 import inventory.model.Item;
 import inventory.model.Lesson;
 import inventory.model.Reservation;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,19 +23,19 @@ public class ExcelGenerator {
     }
 
     public static void generateTableReservations(File toFile, List<Reservation> reservations) {
-        Workbook workbook = new XSSFWorkbook();
-        Sheet sheet = workbook.createSheet("Reservations");
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Reservations");
 
-        Row headerRow = sheet.createRow(0);
+        XSSFRow headerRow = sheet.createRow(0);
 
         for (int i = 0; i < reservationColumns.length; i++) {
-            Cell cell = headerRow.createCell(i);
+            XSSFCell cell = headerRow.createCell(i);
             cell.setCellValue(reservationColumns[i]);
         }
 
         for (int i = 0; i < reservations.size(); i++) {
             Reservation reservation = reservations.get(i);
-            Row row = sheet.createRow(i + 1);
+            XSSFRow row = sheet.createRow(i + 1);
 
             Item item = reservation.getItem();
             Lesson lesson = reservation.getLesson();
@@ -46,8 +47,8 @@ public class ExcelGenerator {
             row.createCell(5).setCellValue(reservation.getComment());   // reservation comment
 
             // set style to display date
-            CellStyle cellStyle = workbook.createCellStyle();
-            CreationHelper createHelper = workbook.getCreationHelper();
+            XSSFCellStyle cellStyle = workbook.createCellStyle();
+            XSSFCreationHelper createHelper = workbook.getCreationHelper();
             cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("yyyy/mm/dd"));
             Cell cell = row.getCell(1);
             cell.setCellStyle(cellStyle);
@@ -59,9 +60,16 @@ public class ExcelGenerator {
         }
 
         try {
-            if (toFile.createNewFile()) {
-                FileOutputStream fileOut = new FileOutputStream(toFile, false);
+            if (!toFile.exists()) {
+                File parent = toFile.getParentFile();
+                if (parent != null) {
+                    parent.mkdirs();
+                }
+                toFile.createNewFile();
+
+                FileOutputStream fileOut = new FileOutputStream(toFile);
                 workbook.write(fileOut);
+                workbook.close();
                 fileOut.close();
             }
         } catch (IOException e) {

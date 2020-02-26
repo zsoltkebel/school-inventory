@@ -3,7 +3,6 @@ package inventory.ui.tabs.reservations;
 import inventory.utils.ExcelGenerator;
 import inventory.utils.StageHelper;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -14,15 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
-import javafx.stage.DirectoryChooser;
-import javafx.stage.Stage;
-import javafx.util.Callback;
+import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.net.URL;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.ResourceBundle;
 
 public class DialogExportController implements Initializable {
@@ -35,8 +30,7 @@ public class DialogExportController implements Initializable {
     @FXML
     public Label labelPath;
 
-    private File toFile;
-
+    private File destinationFile;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         buttonExport.setDisable(true);
@@ -92,32 +86,25 @@ public class DialogExportController implements Initializable {
 
     @FXML
     public void onSelectPathClicked(ActionEvent actionEvent) {
-        DirectoryChooser chooser = new DirectoryChooser();
-        chooser.setTitle("Select directory");
+        FileChooser fileChooser = new FileChooser();
+        //Set extension filter for *.xlsx files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xlsx)", "*.xlsx");
+        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setTitle("Save to");
+        fileChooser.setInitialFileName("Export");
 
-        File selectedDirectory = chooser.showDialog(((Node) actionEvent.getTarget()).getScene().getWindow());
+        destinationFile = fileChooser.showSaveDialog(((Node) actionEvent.getTarget()).getScene().getWindow());
 
-        if (selectedDirectory != null) {
-            Calendar now = Calendar.getInstance();
-            int year = now.get(Calendar.YEAR);
-            int month = now.get(Calendar.MONTH) + 1; // zero based
-            int day = now.get(Calendar.DAY_OF_MONTH);
-            int hour = now.get(Calendar.HOUR_OF_DAY);
-            int minute = now.get(Calendar.MINUTE);
-
-            String fileName = String.format("export %d.%02d.%02d %02d:%02d.xlsx", year, month, day, hour, minute);
-            toFile = new File(selectedDirectory.getPath() + File.separator + fileName);
-            labelPath.setText(toFile.getPath());
+        if (destinationFile != null) {
+            labelPath.setText(destinationFile.getPath());
             buttonExport.setDisable(false);
         }
-
-
     }
 
     @FXML
     public void onExportClicked(ActionEvent actionEvent) {
-        if (toFile != null) {
-            ExcelGenerator.generateTableReservations(toFile, datePickerStart.getValue(), datePickerEnd.getValue());
+        if (destinationFile != null) {
+            ExcelGenerator.generateTableReservations(destinationFile, datePickerStart.getValue(), datePickerEnd.getValue());
             // close dialog
             StageHelper.close(actionEvent);
         }

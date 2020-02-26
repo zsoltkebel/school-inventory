@@ -105,9 +105,19 @@ public class Inventory {
 
     /**
      *
-     * @param id
+     * @param item
      */
-    public void removeItem(int id) {}
+    public void removeItem(Item item) {
+        // decrement number of items in category
+        Category category = getCategory(item.getCategoryId());
+        category.decrementNumOfItems();
+
+        DATABASE.update(Database.TABLE_CATEGORIES, category);
+        // delete item
+        items.removeIf(current -> current.getId() == item.getId());
+
+        DATABASE.delete(item.getId(), Database.TABLE_ITEMS);
+    }
 
     public void updateItem(Item oldItem, Item newItem) {
         int index = items.indexOf(oldItem);
@@ -137,6 +147,13 @@ public class Inventory {
                 .filter(item -> item.getId() == id)
                 .findFirst()
                 .orElse(null);
+    }
+
+    public Item[] getItems(int categoryId) {
+        if (categoryId < 0) return null;
+        return items.stream()
+                .filter(item -> item.getCategoryId() == categoryId)
+                .toArray(Item[]::new);
     }
 
     public int getNumOfItems(Category category) {
