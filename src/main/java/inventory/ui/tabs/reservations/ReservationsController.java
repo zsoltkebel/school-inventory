@@ -1,20 +1,14 @@
 package inventory.ui.tabs.reservations;
 
 import inventory.model.*;
-import inventory.ui.controllers.reservations.ReservationCell;
-import inventory.utils.ExcelGenerator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
-import javafx.scene.paint.Paint;
-import javafx.stage.DirectoryChooser;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 

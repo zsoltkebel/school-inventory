@@ -1,4 +1,4 @@
-package inventory.ui.controllers.reservations;
+package inventory.ui.tabs.reservations;
 
 import inventory.model.Reservation;
 import inventory.ui.CustomListCell;
@@ -12,8 +12,8 @@ public class ReservationCell extends CustomListCell<Reservation> {
     private Label labelName;
     @FXML
     private Label labelTime;
-
-    @FXML private Label labelComment;
+    @FXML
+    private Label labelComment;
     @FXML
     private VBox splitPane;
 
