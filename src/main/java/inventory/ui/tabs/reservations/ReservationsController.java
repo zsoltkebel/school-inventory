@@ -1,6 +1,7 @@
 package inventory.ui.tabs.reservations;
 
 import inventory.model.*;
+import inventory.ui.dialogs.ExportDialog;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,7 +33,7 @@ public class ReservationsController implements Initializable {
         reservationsListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             ReservationManager.getInstance().setSelectedReservation(newValue);
             Reservation selected = ReservationManager.getInstance().getSelectedReservation();
-            if (newValue.getId() != selected.getId()) {
+            if (newValue != null && newValue.getId() != selected.getId()) {
                 // if selected is not changed in the model class -> UI should not change selected item either
                 reservationsListView.getSelectionModel().select(oldValue);
             }

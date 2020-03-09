@@ -1,4 +1,4 @@
-package inventory.ui.tabs.reservations;
+package inventory.ui.dialogs;
 
 import inventory.ui.DialogStage;
 

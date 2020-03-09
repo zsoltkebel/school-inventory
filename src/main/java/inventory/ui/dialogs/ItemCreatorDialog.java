@@ -1,4 +1,4 @@
-package inventory.ui.tabs.inventory;
+package inventory.ui.dialogs;
 
 import inventory.model.Item;
 import inventory.ui.DialogStage;

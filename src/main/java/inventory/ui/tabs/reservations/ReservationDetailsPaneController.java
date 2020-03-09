@@ -1,4 +1,4 @@
-package inventory.ui.controllers;
+package inventory.ui.tabs.reservations;
 
 import inventory.model.Reservation;
 import inventory.model.ReservationManager;

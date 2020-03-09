@@ -4,15 +4,15 @@
 <?import javafx.scene.layout.*?>
 <fx:root type="javafx.scene.control.ListCell" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <graphic>
-        <HBox fx:id="cellPane" spacing="10">
+        <HBox fx:id="cellPane" spacing="10" minWidth="200">
             <VBox HBox.hgrow="ALWAYS">
-                <Label fx:id="nameLabel" text="Label"
+                <Label fx:id="nameLabel" text="Name"
                        stylesheets="/styles/emphasis.css"/>
-                <Label fx:id="descriptionLabel" text="Label" maxWidth="140" AnchorPane.bottomAnchor="0.0"
+                <Label fx:id="descriptionLabel" text="Description" maxWidth="140" AnchorPane.bottomAnchor="0.0"
                        AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
             </VBox>
             <AnchorPane minHeight="0.0" minWidth="0.0">
-                <Label fx:id="categoryLabel" alignment="CENTER_RIGHT" text="Label" AnchorPane.bottomAnchor="0.0"
+                <Label fx:id="categoryLabel" alignment="CENTER_RIGHT" text="Category" AnchorPane.bottomAnchor="0.0"
                        AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
             </AnchorPane>
 

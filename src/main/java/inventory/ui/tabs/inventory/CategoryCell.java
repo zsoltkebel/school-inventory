@@ -23,7 +23,7 @@ public class CategoryCell extends ListCell<Category> {
 
     private void loadFXML() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/tab_inventory/category_cell_2.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/tab_inventory/category_cell.fxml"));
             loader.setController(this);
             loader.setRoot(this);
             loader.load();

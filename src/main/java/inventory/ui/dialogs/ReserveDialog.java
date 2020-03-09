@@ -1,4 +1,4 @@
-package inventory.ui.tabs.inventory;
+package inventory.ui.dialogs;
 
 import inventory.model.Item;
 import inventory.model.ReservationManager;
@@ -26,6 +26,6 @@ public class ReserveDialog extends DialogStage {
 
         ReservationManager.getInstance().newReservation(selectedItem);
 
-        this.setOnCloseRequest(event -> ReservationManager.getInstance().reloadSelected());
+        this.setOnCloseRequest(event -> ReservationManager.getInstance().setSelectedReservation(null));
     }
 }

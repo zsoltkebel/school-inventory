@@ -5,12 +5,8 @@ import inventory.model.Item;
 import inventory.model.Reservation;
 import inventory.model.ReservationManager;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
@@ -27,7 +23,7 @@ public class PaneFactory {
 
         Pane itemPane = null;
         try {
-            itemPane = FXMLLoader.load(PaneFactory.class.getResource("/fxml/item_pane.fxml"));
+            itemPane = FXMLLoader.load(PaneFactory.class.getResource("/fxml/tab_inventory/item_pane.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,33 +40,5 @@ public class PaneFactory {
         categoryLabel.setText(Inventory.getInstance().getCategory(item.getCategoryId()).getName());
 
         return itemPane;
-    }
-
-    public static Pane getReservationPane(Reservation reservation) {
-        Pane reservationPane = null;
-        try {
-            reservationPane = FXMLLoader.load(PaneFactory.class.getResource("/fxml/reservation_pane.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        assert reservationPane != null;
-        Label nameLabel = (Label) reservationPane.lookup("#nameLabel");
-        Button returnButton = (Button) reservationPane.lookup("#returnButton");
-        //TODO display date of the reservation
-        returnButton.setOnAction(event -> {
-            ReservationManager.getInstance().returnReservation(reservation);
-//            Inventory.getInstance().changeItemAvailability(Inventory.getInstance().getItem(reservation.getItemId()).getId(), true);
-        });
-
-        nameLabel.setText(reservation.getName());
-
-        Item item = Inventory.getInstance().getItem(reservation.getItemId());
-        Pane pane = reservation.isReturned()
-                ? getItemPane(item, Color.valueOf("#c7ffc4"))
-                : getItemPane(item, Color.valueOf("#ffc4c4"));
-        reservationPane.getChildren().add(pane);
-
-        return reservationPane;
     }
 }

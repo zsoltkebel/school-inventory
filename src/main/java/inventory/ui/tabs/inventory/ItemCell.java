@@ -3,6 +3,7 @@ package inventory.ui.tabs.inventory;
 import inventory.model.Category;
 import inventory.model.Inventory;
 import inventory.model.Item;
+import inventory.ui.dialogs.ReserveDialog;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;

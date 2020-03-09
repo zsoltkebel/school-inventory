@@ -3,12 +3,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
-<VBox fx:controller="inventory.ui.controllers.CategoriesPaneController" xmlns="http://javafx.com/javafx"
+<VBox fx:controller="inventory.ui.tabs.inventory.CategoriesPaneController" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml" alignment="CENTER_LEFT" prefWidth="200">
     <padding><Insets topRightBottomLeft="5"/></padding>
-    <HBox alignment="CENTER_LEFT">
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Button text="New" onAction="#handleButtonAction" maxWidth="1.7976931348623157E308"/>
         <Label text="Categories" stylesheets="/styles/title.css"/>
-        <Button fx:id="addButton" text="New" onAction="#handleButtonAction" maxWidth="1.7976931348623157E308"/>
     </HBox>
 
     <ListView fx:id="listView" VBox.vgrow="ALWAYS"

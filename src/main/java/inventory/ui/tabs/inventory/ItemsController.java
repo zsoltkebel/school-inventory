@@ -1,16 +1,14 @@
-package inventory.ui.controllers;
+package inventory.ui.tabs.inventory;
 
 import inventory.model.Category;
+import inventory.model.Filter;
 import inventory.model.Inventory;
 import inventory.model.Item;
-import inventory.model.Filter;
-import inventory.ui.tabs.inventory.ItemCreatorDialog;
-import inventory.ui.tabs.inventory.ItemCellFactory;
+import inventory.ui.dialogs.ItemCreatorDialog;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
@@ -19,20 +17,17 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ItemsPaneController implements Initializable {
-
-    private Inventory inventory = Inventory.getInstance();
-    private Filter filter = Filter.getInstance();
+public class ItemsController implements Initializable {
 
     @FXML
     private ListView<Item> itemListView;
-
     @FXML
-    private Button addButton;
+    private Pane filteringPane;
+    @FXML
+    private Label filterLabel;
 
-    @FXML private Pane filteringPane;
-
-    @FXML private Label filterLabel;
+    private Inventory inventory = Inventory.getInstance();
+    private Filter filter = Filter.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,26 +52,8 @@ public class ItemsPaneController implements Initializable {
 
     @FXML
     private void handleAddButtonAction(ActionEvent actionEvent) {
-
         Stage dialog = new ItemCreatorDialog(null);
-//        dialog.initModality(Modality.APPLICATION_MODAL);
-//        dialog.setTitle("New Item");
-//
-//        ItemCreatorPane itemCreatorPane = new ItemCreatorPane(null);
-//        Scene scene = new Scene(itemCreatorPane);
-//
-//        itemCreatorPane.getDoneButton().setOnAction(event -> {
-//            Category category = itemCreatorPane.getCategory();
-//
-//            if (category == null) return;
-//
-//            inventory.addItem(itemCreatorPane.getName(), itemCreatorPane.getDescription(), category.getId());
-//            dialog.close();
-//        });
-
-//        dialog.setScene(scene);
         dialog.show();
-
     }
 
     @FXML

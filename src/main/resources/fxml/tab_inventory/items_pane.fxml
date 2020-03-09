@@ -3,20 +3,19 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox fx:controller="inventory.ui.controllers.ItemsPaneController" xmlns="http://javafx.com/javafx"
+<VBox fx:controller="inventory.ui.tabs.inventory.ItemsController" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml" alignment="CENTER_LEFT" prefWidth="200">
     <padding>
         <Insets topRightBottomLeft="5"/>
     </padding>
-    <HBox alignment="CENTER_LEFT">
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Button text="New" onAction="#handleAddButtonAction" maxWidth="1.7976931348623157E308"/>
         <Label text="Items" stylesheets="/styles/title.css"/>
-        <Button fx:id="addButton" text="New" onAction="#handleAddButtonAction" maxWidth="1.7976931348623157E308"/>
         <Region HBox.hgrow="ALWAYS"/>
-        <HBox fx:id="filteringPane" visible="false" alignment="CENTER_RIGHT">
-            <Label text="Showing: "/>
+        <HBox fx:id="filteringPane" visible="false" alignment="CENTER_RIGHT" spacing="10">
+            <Label text="Filter:"/>
             <Label fx:id="filterLabel" text="all" maxWidth="170"/>
-            <Label text="s"/>
-            <Button fx:id="clearFilterButton" text="Show All" onAction="#handleClearFilterButtonAction"/>
+            <Button text="Show All" onAction="#handleClearFilterButtonAction"/>
         </HBox>
     </HBox>
     <ListView fx:id="itemListView" VBox.vgrow="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"

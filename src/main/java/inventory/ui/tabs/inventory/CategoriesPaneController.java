@@ -1,4 +1,4 @@
-package inventory.ui.controllers;
+package inventory.ui.tabs.inventory;
 
 import inventory.model.Category;
 import inventory.model.Filter;

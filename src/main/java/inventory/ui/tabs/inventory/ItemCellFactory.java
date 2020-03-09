@@ -2,6 +2,7 @@ package inventory.ui.tabs.inventory;
 
 import inventory.model.Inventory;
 import inventory.model.Item;
+import inventory.ui.dialogs.ItemCreatorDialog;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;

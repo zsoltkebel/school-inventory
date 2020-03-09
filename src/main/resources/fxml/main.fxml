@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="inventory.MainController">
-    <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+    <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
              prefHeight="700" prefWidth="1000" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0"
              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Tab fx:id="tab_home" text="Home">
@@ -14,7 +14,7 @@
         <Tab fx:id="tab_inventory" text="Inventory">
             <fx:include fx:id="tab_inventory_page" source="tab_inventory/tab_inventory.fxml"/>
         </Tab>
-        <Tab fx:id="tab_reservations" text="Reservations">
+        <Tab fx:id="tabReservations" text="Reservations">
             <fx:include fx:id="tab_reservations_page" source="tab_reservations/tab_reservations.fxml"/>
         </Tab>
     </TabPane>

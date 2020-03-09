@@ -1,23 +1,21 @@
 package inventory.ui.tabs.inventory;
 
 import inventory.model.ReservationManager;
+import inventory.utils.StageHelper;
 import javafx.event.ActionEvent;
-import javafx.scene.Node;
-import javafx.stage.Stage;
 
 public class DialogReservationController {
 
     public void onCancelClicked(ActionEvent actionEvent) {
-        ReservationManager.getInstance().reloadSelected();
+        ReservationManager.getInstance().setSelectedReservation(null);
         // close dialog
-        Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();
-        stage.close();
+        StageHelper.close(actionEvent);
     }
 
     public void onReserveClicked(ActionEvent actionEvent) {
         ReservationManager.getInstance().insertNew();
+        ReservationManager.getInstance().setSelectedReservation(null);
         // close dialog
-        Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();
-        stage.close();
+        StageHelper.close(actionEvent);
     }
 }

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <VBox fx:id="vBox" spacing="5" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="inventory.ui.controllers.ReservationDetailsController">
+      fx:controller="inventory.ui.ReservationDetailsController">
     <padding>
         <Insets topRightBottomLeft="5"/>
     </padding>

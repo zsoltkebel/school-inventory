@@ -1,10 +1,9 @@
-package inventory.ui.controllers;
+package inventory.ui;
 
 import inventory.model.Inventory;
 import inventory.model.Lesson;
 import inventory.model.Reservation;
 import inventory.model.ReservationManager;
-import inventory.ui.PaneFactory;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -47,7 +46,7 @@ public class ReservationDetailsController implements Initializable {
             }
         });
 
-        lessonComboBox.setItems(ReservationManager.getInstance().getClassesObservableList());
+        lessonComboBox.setItems(ReservationManager.getInstance().lessonsObservable());
         lessonComboBox.setConverter(new StringConverter<Lesson>() {
             @Override
             public String toString(Lesson object) {
@@ -69,7 +68,7 @@ public class ReservationDetailsController implements Initializable {
         datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
             // refresh UI
             lessonComboBox.setItems(FXCollections.observableArrayList());
-            lessonComboBox.setItems(ReservationManager.getInstance().getClassesObservableList());
+            lessonComboBox.setItems(ReservationManager.getInstance().lessonsObservable());
         });
     }
 
