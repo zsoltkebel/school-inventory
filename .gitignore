@@ -4,3 +4,5 @@ out/
 target/
 .idea/
 src/test/
+
+Inventory.iml
