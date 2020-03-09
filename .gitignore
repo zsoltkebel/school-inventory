@@ -3,3 +3,4 @@ Database.db
 out/
 target/
 .idea/
+src/test/
