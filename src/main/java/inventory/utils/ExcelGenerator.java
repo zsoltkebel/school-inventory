@@ -3,8 +3,7 @@ package inventory.utils;
 import inventory.model.Item;
 import inventory.model.Lesson;
 import inventory.model.Reservation;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.*;
 
 import java.io.File;
@@ -63,20 +62,16 @@ public class ExcelGenerator {
             if (!toFile.exists()) {
                 File parent = toFile.getParentFile();
                 if (parent != null) {
-                    parent.mkdirs();
+                    if (parent.mkdirs() && toFile.createNewFile()) {
+                        FileOutputStream fileOut = new FileOutputStream(toFile);
+                        workbook.write(fileOut);
+                        workbook.close();
+                        fileOut.close();
+                    }
                 }
-                toFile.createNewFile();
-
-                FileOutputStream fileOut = new FileOutputStream(toFile);
-                workbook.write(fileOut);
-                workbook.close();
-                fileOut.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        FileOutputStream fileOut = new FileOutputStream("contacts.xlsx");
-//        workbook.write(fileOut);
-//        fileOut.close();
     }
 }

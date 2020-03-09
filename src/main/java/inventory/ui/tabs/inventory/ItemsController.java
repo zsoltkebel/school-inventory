@@ -1,8 +1,8 @@
 package inventory.ui.tabs.inventory;
 
 import inventory.model.Category;
-import inventory.model.Filter;
-import inventory.model.Inventory;
+import inventory.model.singleton.Filter;
+import inventory.model.singleton.Inventory;
 import inventory.model.Item;
 import inventory.ui.dialogs.ItemCreatorDialog;
 import javafx.collections.transformation.FilteredList;

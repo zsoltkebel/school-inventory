@@ -1,5 +1,6 @@
-package inventory.model;
+package inventory.model.singleton;
 
+import inventory.model.*;
 import inventory.utils.Database;
 import inventory.utils.JSONUtil;
 import javafx.animation.KeyFrame;

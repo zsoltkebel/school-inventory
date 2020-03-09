@@ -1,5 +1,6 @@
 package inventory.model;
 
+import inventory.model.singleton.ReservationManager;
 import javafx.beans.property.*;
 
 import java.util.List;

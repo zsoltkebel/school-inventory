@@ -1,8 +1,8 @@
 package inventory.ui.tabs.home;
 
-import inventory.model.Inventory;
+import inventory.model.singleton.Inventory;
 import inventory.model.Reservation;
-import inventory.model.ReservationManager;
+import inventory.model.singleton.ReservationManager;
 import inventory.ui.CustomListCell;
 import inventory.ui.PaneFactory;
 import javafx.fxml.FXML;

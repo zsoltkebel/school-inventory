@@ -1,6 +1,8 @@
 package inventory.ui.tabs.reservations;
 
 import inventory.model.*;
+import inventory.model.singleton.Inventory;
+import inventory.model.singleton.ReservationManager;
 import inventory.ui.dialogs.ExportDialog;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

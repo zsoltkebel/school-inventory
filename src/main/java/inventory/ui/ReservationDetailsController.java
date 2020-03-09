@@ -1,9 +1,9 @@
 package inventory.ui;
 
-import inventory.model.Inventory;
+import inventory.model.singleton.Inventory;
 import inventory.model.Lesson;
 import inventory.model.Reservation;
-import inventory.model.ReservationManager;
+import inventory.model.singleton.ReservationManager;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

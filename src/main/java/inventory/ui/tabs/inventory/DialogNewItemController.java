@@ -1,7 +1,7 @@
 package inventory.ui.tabs.inventory;
 
 import inventory.model.Category;
-import inventory.model.Inventory;
+import inventory.model.singleton.Inventory;
 import inventory.model.Item;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

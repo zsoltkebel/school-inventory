@@ -1,6 +1,6 @@
 package inventory.ui.tabs.inventory;
 
-import inventory.model.ReservationManager;
+import inventory.model.singleton.ReservationManager;
 import inventory.utils.StageHelper;
 import javafx.event.ActionEvent;
 

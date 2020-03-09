@@ -1,11 +1,8 @@
 package inventory.ui.dialogs;
 
 import inventory.model.Item;
-import inventory.model.ReservationManager;
+import inventory.model.singleton.ReservationManager;
 import inventory.ui.DialogStage;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 
 public class ReserveDialog extends DialogStage {
 

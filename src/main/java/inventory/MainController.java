@@ -1,6 +1,6 @@
 package inventory;
 
-import inventory.model.ReservationManager;
+import inventory.model.singleton.ReservationManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;

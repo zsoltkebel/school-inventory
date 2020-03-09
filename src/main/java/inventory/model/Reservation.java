@@ -1,5 +1,6 @@
 package inventory.model;
 
+import inventory.model.singleton.Inventory;
 import javafx.beans.property.*;
 
 import java.sql.Date;

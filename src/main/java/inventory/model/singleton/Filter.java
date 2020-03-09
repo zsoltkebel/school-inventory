@@ -1,7 +1,6 @@
-package inventory.model;
+package inventory.model.singleton;
 
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleLongProperty;
 
 /**
  * Singleton
@@ -34,13 +33,6 @@ public class Filter {
 
     public void clear() {
         categoryIdProperty.set(-1);
-    }
-
-    public void refresh() {
-        int temp = categoryIdProperty.get();
-
-        categoryIdProperty.set(-1);
-        categoryIdProperty.set(temp);
     }
 
     public interface FilterChangeListener {

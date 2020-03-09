@@ -1,11 +1,8 @@
 package inventory.ui;
 
-import inventory.model.Inventory;
+import inventory.model.singleton.Inventory;
 import inventory.model.Item;
-import inventory.model.Reservation;
-import inventory.model.ReservationManager;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;

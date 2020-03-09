@@ -1,7 +1,7 @@
 package inventory.ui.tabs.home;
 
 import inventory.model.Reservation;
-import inventory.model.ReservationManager;
+import inventory.model.singleton.ReservationManager;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

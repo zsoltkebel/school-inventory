@@ -1,5 +1,7 @@
-package inventory.model;
+package inventory.model.singleton;
 
+import inventory.model.Category;
+import inventory.model.Item;
 import inventory.utils.Database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

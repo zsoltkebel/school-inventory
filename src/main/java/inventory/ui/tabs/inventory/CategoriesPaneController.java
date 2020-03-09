@@ -1,9 +1,8 @@
 package inventory.ui.tabs.inventory;
 
 import inventory.model.Category;
-import inventory.model.Filter;
-import inventory.model.Inventory;
-import inventory.ui.tabs.inventory.CategoryCellFactory;
+import inventory.model.singleton.Filter;
+import inventory.model.singleton.Inventory;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
