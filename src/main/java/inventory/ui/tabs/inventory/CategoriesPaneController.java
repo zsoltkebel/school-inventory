@@ -1,7 +1,6 @@
 package inventory.ui.tabs.inventory;
 
 import inventory.model.Category;
-import inventory.model.singleton.Filter;
 import inventory.model.singleton.Inventory;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
@@ -22,7 +21,6 @@ import java.util.ResourceBundle;
 public class CategoriesPaneController implements Initializable {
 
     private Inventory inventory = Inventory.getInstance();
-    private Filter filter = Filter.getInstance();
 
     @FXML
     private ListView<Category> listView;
@@ -38,12 +36,12 @@ public class CategoriesPaneController implements Initializable {
             change.next();
             if (change.wasAdded()) {
                 int id = listView.getSelectionModel().getSelectedItem().getId();
-                Filter.getInstance().setCategoryId(id);
+                inventory.setFilterCategoryId(id);
             }
         });
 
-        Filter.getInstance().addListener(() -> {
-            if (filter.isEmpty()) listView.getSelectionModel().clearSelection();
+        inventory.filterCategoryIdProperty().addListener((observable, oldValue, newValue) -> {
+            if (inventory.isEmptyFilter()) listView.getSelectionModel().clearSelection();
         });
     }
 

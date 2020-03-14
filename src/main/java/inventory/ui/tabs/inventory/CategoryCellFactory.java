@@ -1,7 +1,6 @@
 package inventory.ui.tabs.inventory;
 
 import inventory.model.Category;
-import inventory.model.singleton.Filter;
 import inventory.model.singleton.Inventory;
 import inventory.model.Item;
 import inventory.utils.Database;
@@ -18,7 +17,6 @@ import java.util.stream.Collectors;
 public class CategoryCellFactory implements Callback<ListView<Category>, ListCell<Category>> {
 
     Inventory inventory = Inventory.getInstance();
-    Filter filter = Filter.getInstance();
 
     @Override
     public ListCell<Category> call(ListView<Category> categoryListView) {
@@ -98,7 +96,7 @@ public class CategoryCellFactory implements Callback<ListView<Category>, ListCel
                 // delete category
                 inventory.removeCategory(categoryToDelete.getId());
 
-                filter.clear();
+                inventory.clearFilter();
             }
         });
         contextMenu.getItems().addAll(editItem, deleteItem);

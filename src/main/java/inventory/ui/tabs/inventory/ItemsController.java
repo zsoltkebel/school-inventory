@@ -1,9 +1,8 @@
 package inventory.ui.tabs.inventory;
 
 import inventory.model.Category;
-import inventory.model.singleton.Filter;
-import inventory.model.singleton.Inventory;
 import inventory.model.Item;
+import inventory.model.singleton.Inventory;
 import inventory.ui.dialogs.ItemCreatorDialog;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
@@ -27,7 +26,6 @@ public class ItemsController implements Initializable {
     private Label filterLabel;
 
     private Inventory inventory = Inventory.getInstance();
-    private Filter filter = Filter.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -36,16 +34,16 @@ public class ItemsController implements Initializable {
         FilteredList<Item> filteredList = new FilteredList<>(inventory.getItems(), data -> true);
         itemListView.setItems(filteredList);
 
-        Filter.getInstance().addListener(() -> {
-            if (filter.isEmpty()) {
+        inventory.filterCategoryIdProperty().addListener((observable, oldValue, newValue) -> {
+            if (inventory.isEmptyFilter()) {
                 filteringPane.setVisible(false);
                 filteredList.setPredicate(item -> true);
             } else {
-                Category category = inventory.getCategory(filter.getCategoryId());
+                Category category = inventory.getFilterCategory();
 
                 filterLabel.textProperty().bind(category.nameProperty());
                 filteringPane.setVisible(true);
-                filteredList.setPredicate(item -> item.getCategoryId() == filter.getCategoryId());
+                filteredList.setPredicate(item -> item.getCategoryId() == inventory.getFilterCategoryId());
             }
         });
     }
@@ -58,6 +56,6 @@ public class ItemsController implements Initializable {
 
     @FXML
     public void handleClearFilterButtonAction(ActionEvent actionEvent) {
-        filter.clear();
+        inventory.clearFilter();
     }
 }

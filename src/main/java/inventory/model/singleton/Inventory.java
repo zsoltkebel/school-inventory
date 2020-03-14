@@ -3,6 +3,8 @@ package inventory.model.singleton;
 import inventory.model.Category;
 import inventory.model.Item;
 import inventory.utils.Database;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -20,10 +22,14 @@ public class Inventory {
         return SINGLE_INVENTORY;
     }
 
+    // instance variables
     private ObservableList<Category> categories;
     private ObservableList<Item> items;
 
     private Database DATABASE = Database.getInstance();
+
+    // variable for filtering
+    private IntegerProperty filterCategoryId = new SimpleIntegerProperty(-1);
 
     private Inventory() {
         this.categories = FXCollections.observableArrayList();
@@ -39,6 +45,26 @@ public class Inventory {
 
     public ObservableList<Item> getItems() {
         return items;
+    }
+
+    public IntegerProperty filterCategoryIdProperty() {
+        return filterCategoryId;
+    }
+
+    public int getFilterCategoryId() {
+        return filterCategoryId.get();
+    }
+
+    public void setFilterCategoryId(int id) {
+        filterCategoryId.set(id);
+    }
+
+    public boolean isEmptyFilter() {
+        return filterCategoryId.get() < 0;
+    }
+
+    public void clearFilter() {
+        setFilterCategoryId(-1);
     }
 
     public boolean isExistingCategoryName(String name) {
@@ -141,6 +167,10 @@ public class Inventory {
                 .filter(category -> category.getId() == id)
                 .findFirst()
                 .orElse(null);
+    }
+
+    public Category getFilterCategory() {
+        return getCategory(getFilterCategoryId());
     }
 
     public Item getItem(int id) {
