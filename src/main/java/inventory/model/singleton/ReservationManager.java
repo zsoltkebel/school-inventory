@@ -182,7 +182,7 @@ public class ReservationManager {
 
         activeReservations.clear();
         activeReservations.addAll(reservations.stream()
-                .filter(reservation -> reservation.during(date) || (reservation.before(date) && !reservation.isReturned()))
+                .filter(reservation -> (reservation.during(date) || reservation.before(date)) && !reservation.isReturned())
                 .collect(Collectors.toList()));
     }
 
