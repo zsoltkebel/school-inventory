@@ -101,7 +101,7 @@ public class Database {
     public <T extends Record<T>> T insert(String tableName, T record) {
         try {
             // retrieving the SQL command corresponding to the class that is to be inserted
-            String sql = SQLiteHelper.getInsertCommand(tableName, record.getClass());
+            String sql = SQLiteHelper.getInsertCommand(tableName, record);
 
             PreparedStatement statement = conn.prepareStatement(sql);
             // retrieving the fields of the class that is to be inserted
@@ -133,10 +133,18 @@ public class Database {
         }
     }
 
+    /**
+     *
+     * @param tableName
+     * @param record
+     * @param <T>
+     * @return
+     */
     public <T extends Record<T>> T update(String tableName, T record) {
-        String sql = SQLiteHelper.getUpdateCommand(tableName, record);
-
         try {
+            // retrieving the SQL command corresponding to the class that is to be inserted
+            String sql = SQLiteHelper.getUpdateCommand(tableName, record);
+
             PreparedStatement statement = conn.prepareStatement(sql);
             Field[] fields = getFields(record.getClass(), "id").toArray(new Field[0]);
 

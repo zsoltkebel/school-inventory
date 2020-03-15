@@ -30,8 +30,8 @@ public class SQLiteHelper {
         return sql;
     }
 
-    static <T extends Record<T>> String getInsertCommand(String tableName, Class<T> forClass) {
-        String[] columns = getFields(forClass).stream()
+    static <T extends Record<T>> String getInsertCommand(String tableName, T record) {
+        String[] columns = getFields(record.getClass()).stream()
                 .map(Field::getName)
                 .filter(s -> !s.equals("id"))
                 .toArray(String[]::new);
