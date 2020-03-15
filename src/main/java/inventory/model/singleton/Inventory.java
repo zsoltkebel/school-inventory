@@ -2,6 +2,7 @@ package inventory.model.singleton;
 
 import inventory.model.Category;
 import inventory.model.Item;
+import inventory.model.Reservation;
 import inventory.utils.Database;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -96,8 +97,8 @@ public class Inventory {
             Item item = items.get(i);
 
             if (item.getCategoryId() == id) {
-                DATABASE.delete(item.getId(), Database.TABLE_ITEMS);
-                items.remove(i--);
+                removeItem(item);
+                i--;
             }
         }
 
@@ -136,6 +137,16 @@ public class Inventory {
      * @param item
      */
     public void removeItem(Item item) {
+        // delete all related reservations
+        for (int i = 0; i < ReservationManager.getInstance().reservationsObservable().size(); i++) {
+            Reservation reservation = ReservationManager.getInstance().reservationsObservable().get(i);
+
+            if (reservation.getItemId() == item.getId()) {
+                ReservationManager.getInstance().remove(reservation);
+                i--;
+            }
+        }
+
         // decrement number of items in category
         Category category = getCategory(item.getCategoryId());
         category.decrementNumOfItems();

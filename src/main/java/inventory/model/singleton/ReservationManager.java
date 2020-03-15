@@ -274,11 +274,11 @@ public class ReservationManager {
         reservationsObservable().set(index, Database.getInstance().update(Database.TABLE_RESERVATIONS, reservation));
     }
 
-    private void delete(Reservation reservation) {
-        delete(reservation.getId());
+    public void remove(Reservation reservation) {
+        remove(reservation.getId());
     }
 
-    private void delete(int id) {
+    public void remove(int id) {
         reservationsObservable().removeIf(reservation -> reservation.getId() == id);
         Database.getInstance().delete(id, Database.TABLE_RESERVATIONS);
     }
@@ -298,7 +298,7 @@ public class ReservationManager {
     }
 
     public void deleteSelected() {
-        delete(getSelectedReservation());
+        remove(getSelectedReservation());
     }
 
     public void unselect() {
