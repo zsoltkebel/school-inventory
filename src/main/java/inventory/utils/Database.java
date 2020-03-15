@@ -91,31 +91,43 @@ public class Database {
         }
     }
 
+    /**
+     * Inserts an Record object into the specified table in the database
+     * @param tableName The name of the table storing the records of this type
+     * @param record The object that is to be inserted into the database
+     * @param <T> The type of the object that is to be inserted into the database
+     * @return the original object with the correct id after insertion
+     */
     public <T extends Record<T>> T insert(String tableName, T record) {
-        String sql = SQLiteHelper.getInsertCommand(tableName, record.getClass());
-
         try {
-            PreparedStatement statement = conn.prepareStatement(sql);
-            Field[] fields = (Field[]) getFields(record.getClass(), "id").toArray(new Field[0]);;
+            // retrieving the SQL command corresponding to the class that is to be inserted
+            String sql = SQLiteHelper.getInsertCommand(tableName, record.getClass());
 
+            PreparedStatement statement = conn.prepareStatement(sql);
+            // retrieving the fields of the class that is to be inserted
+            Field[] fields = getFields(record.getClass(), "id").toArray(new Field[0]);
+
+            // for each field retrieve the value with the appropriate getter and
+            // set the corresponding parameter in the prepared statement
             for (int i = 0; i < fields.length; i++) {
                 Field field = fields[i];
                 Method setter = statementSetterMethod(field);
                 Method getter = getterMethod(field);
 
-                try {
+                if (setter != null && getter != null) {
                     setter.invoke(statement, i + 1, getter.invoke(record));
-                } catch (NullPointerException | InvocationTargetException | IllegalAccessException e) {
-                    e.printStackTrace();
                 }
             }
 
             statement.executeUpdate();
 
+            // retrieve the id of the newly inserted record
             int id = statement.getGeneratedKeys().getInt(1);
 
+            // return the record with the actual id that was inserted
             return record.withId(id);
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException | InvocationTargetException | IllegalAccessException e) {
+            // if an error occurred return null
             e.printStackTrace();
             return null;
         }

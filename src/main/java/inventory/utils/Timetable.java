@@ -1,5 +1,6 @@
-package inventory.model;
+package inventory.utils;
 
+import inventory.model.Lesson;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
