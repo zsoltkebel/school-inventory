@@ -7,19 +7,21 @@ import inventory.model.Record;
 import inventory.model.Reservation;
 import javafx.beans.property.ListProperty;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.*;
-import java.sql.Date;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 import static inventory.utils.ReflectionUtil.getFields;
-import static inventory.utils.SQLiteHelper.*;
+import static inventory.utils.SQLiteHelper.getSQLType;
+import static inventory.utils.SQLiteHelper.statementSetterMethod;
 
 public class Database {
 
@@ -93,16 +95,63 @@ public class Database {
 
     /**
      * Inserts an Record object into the specified table in the database
+     *
      * @param tableName The name of the table storing the records of this type
-     * @param record The object that is to be inserted into the database
-     * @param <T> The type of the object that is to be inserted into the database
+     * @param record    The object that is to be inserted into the database
+     * @param <T>       The type of the object that is to be inserted into the database
      * @return the original object with the correct id after insertion
      */
     public <T extends Record<T>> T insert(String tableName, T record) {
         try {
-            // retrieving the SQL command corresponding to the class that is to be inserted
+            // retrieving the SQL command corresponding to the record that is to be inserted
             String sql = SQLiteHelper.getInsertCommand(tableName, record);
 
+            PreparedStatement statement = updateFields(sql, record);
+
+            // making sure that the statement executed
+            assert statement != null;
+            // retrieve the id of the newly inserted record if the statement was executed
+            int id = statement.getGeneratedKeys().getInt(1);
+
+            // return the record with the actual id that was inserted
+            return record.withId(id);
+        } catch (SQLException e) {
+            // if an error occurred return null
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Updates a Record object in the specific table in the database
+     *
+     * @param tableName The name of the table storing the records of this type
+     * @param record    The object that is to be updated in the database
+     * @param <T>       The type of the object that is to be updated in the database
+     * @return the original object
+     */
+    public <T extends Record<T>> T update(String tableName, T record) {
+        // retrieving the SQL command corresponding to the record that is to be updated
+        String sql = SQLiteHelper.getUpdateCommand(tableName, record);
+
+        PreparedStatement statement = updateFields(sql, record);
+
+        // making sure that the statement executed
+        assert statement != null;
+        // return the record
+        return record;
+    }
+
+    /**
+     * Sets the not specified parameters of an sql command and creates a prepared statement
+     *
+     * @param sql    The sql command without specified parameters
+     * @param record The object whose fields are to be set in the prepared statement
+     * @param <T>    The type of the object
+     * @return the papered statement that was already executed or null if an error occurred
+     */
+    private <T extends Record<T>> PreparedStatement updateFields(String sql, T record) {
+        try {
             PreparedStatement statement = conn.prepareStatement(sql);
             // retrieving the fields of the class that is to be inserted
             Field[] fields = getFields(record.getClass(), "id").toArray(new Field[0]);
@@ -121,52 +170,8 @@ public class Database {
 
             statement.executeUpdate();
 
-            // retrieve the id of the newly inserted record
-            int id = statement.getGeneratedKeys().getInt(1);
-
-            // return the record with the actual id that was inserted
-            return record.withId(id);
-        } catch (SQLException | NullPointerException | InvocationTargetException | IllegalAccessException e) {
-            // if an error occurred return null
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
-     *
-     * @param tableName
-     * @param record
-     * @param <T>
-     * @return
-     */
-    public <T extends Record<T>> T update(String tableName, T record) {
-        try {
-            // retrieving the SQL command corresponding to the class that is to be inserted
-            String sql = SQLiteHelper.getUpdateCommand(tableName, record);
-
-            PreparedStatement statement = conn.prepareStatement(sql);
-            Field[] fields = getFields(record.getClass(), "id").toArray(new Field[0]);
-
-            for (int i = 0; i < fields.length; i++) {
-                Field field = fields[i];
-                Method setter = statementSetterMethod(field);
-                Method getter = getterMethod(field);
-
-                try {
-                    assert setter != null;
-                    assert getter != null;
-                    setter.invoke(statement, i + 1, getter.invoke(record));
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            statement.executeUpdate();
-            int id = record.getId();
-
-            return record.withId(id);
-        } catch (SQLException e) {
+            return statement;
+        } catch (SQLException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
             return null;
         }
