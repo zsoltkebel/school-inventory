@@ -4,18 +4,21 @@ import inventory.model.Reservation;
 import inventory.ui.CustomListCell;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
 public class ReservationCell extends CustomListCell<Reservation> {
 
     @FXML
     private Label labelName;
     @FXML
-    private Label labelTime;
+    private Label labelDate;
+    @FXML
+    private Label labelLesson;
     @FXML
     private Label labelComment;
     @FXML
-    private VBox splitPane;
+    private GridPane root;
 
     @Override
     protected String getFXMLRoute() {
@@ -23,18 +26,26 @@ public class ReservationCell extends CustomListCell<Reservation> {
     }
 
     @Override
-    protected void updateItem(Reservation item, boolean empty) {
-        super.updateItem(item, empty);
+    protected void updateItem(Reservation reservation, boolean empty) {
+        super.updateItem(reservation, empty);
 
-        if (item == null) {
+        if (reservation == null) {
             setGraphic(null);
             return;
         }
 
-        labelName.textProperty().bind(item.nameProperty());
-        labelComment.textProperty().bind(item.commentProperty());
-        labelTime.setText(item.getTime());
+        labelName.textProperty().bind(reservation.nameProperty());
+        labelComment.textProperty().bind(reservation.commentProperty());
+        labelDate.setText(reservation.getDateText());
+        labelLesson.setText(reservation.getLesson().getNo() + ". lesson");
 
-        setGraphic(splitPane);
+        if (!reservation.isReturned()) {
+            labelName.setTextFill(Color.RED);
+            labelComment.setTextFill(Color.RED);
+        } else {
+            labelName.setTextFill(Color.BLACK);
+            labelComment.setTextFill(Color.BLACK);
+        }
+        setGraphic(root);
     }
 }

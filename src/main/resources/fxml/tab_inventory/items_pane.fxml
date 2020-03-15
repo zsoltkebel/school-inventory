@@ -13,8 +13,8 @@
         <Label text="Items" stylesheets="/styles/title.css"/>
         <Region HBox.hgrow="ALWAYS"/>
         <HBox fx:id="filteringPane" visible="false" alignment="CENTER_RIGHT" spacing="10">
-            <Label text="Filter:"/>
-            <Label fx:id="filterLabel" text="all" maxWidth="170"/>
+            <Label text="Filter:" textFill="blue"/>
+            <Label fx:id="filterLabel" text="all" maxWidth="170" textFill="blue"/>
             <Button text="Show All" onAction="#handleClearFilterButtonAction"/>
         </HBox>
     </HBox>

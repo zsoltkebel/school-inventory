@@ -67,12 +67,6 @@ public class Item extends Record<Item> {
         this.categoryId.set(categoryId);
     }
 
-    public boolean isAvailable() {
-        //TODO getter to reservations that  are unreturned
-//        return ReservationManager.getInstance().geRe;
-        return true;
-    }
-
     public List<Reservation> getCurrentReservations() {
         return ReservationManager.getInstance().activeReservations(getId());
     }

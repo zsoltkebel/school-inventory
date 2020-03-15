@@ -23,11 +23,12 @@
             <Label text="Number of displayed reservations: "/>
             <Spinner fx:id="spinnerLimit"/>
         </HBox>
-        <HBox spacing="5">
+        <HBox spacing="5" alignment="CENTER">
             <TextField fx:id="textFieldName" promptText="Name"/>
             <ComboBox fx:id="comboBoxCategory" promptText="Category"/>
             <Button text="Filter" prefWidth="100" onAction="#onFilterClicked"/>
             <Button text="Show All" onAction="#onClearFilterClicked"/>
+            <Label fx:id="labelFilteringActive" text="Filtering is active" textFill="blue" visible="false"/>
             <Region HBox.hgrow="ALWAYS"/>
             <Button text="Export Data to Excel" onAction="#onExportClicked"/>
         </HBox>

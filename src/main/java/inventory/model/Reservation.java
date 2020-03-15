@@ -139,19 +139,14 @@ public class Reservation extends Record<Reservation> {
         this.comment.setValue(comment);
     }
 
-
-    public String getTime() {
-        return getDate().getYear() + "." + getDate().getMonth() + "." + getDate().getDayOfMonth();
-    }
-
     public boolean during(Instant instant) {
         LocalDate date = instant.atZone(ZoneId.systemDefault()).toLocalDate();
         LocalTime time = LocalTime.from(instant.atZone(ZoneId.systemDefault()));
         Lesson lesson = getLesson();
 
         return getDate().isEqual(date) &&
-                !lesson.getStart().isBefore(time) &&
-                !lesson.getEnd().isAfter(time);
+                !lesson.getStart().isAfter(time) &&
+                !lesson.getEnd().isBefore(time);
     }
 
     public boolean before(Instant instant) {
@@ -193,5 +188,9 @@ public class Reservation extends Record<Reservation> {
                 getName().equals(other.getName()) &&
                 getComment().equals(other.getComment()) &&
                 isReturned() == other.isReturned();
+    }
+
+    public String getDateText() {
+        return String.format("%04d.%02d.%02d", getDate().getYear(), getDate().getMonthValue(), getDate().getDayOfMonth());
     }
 }

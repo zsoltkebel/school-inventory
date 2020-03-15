@@ -2,16 +2,26 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<fx:root prefHeight="42.0" prefWidth="200.0" type="javafx.scene.control.ListCell" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="42.0" prefWidth="200.0" type="javafx.scene.control.ListCell"
+         xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
     <graphic>
-        <VBox fx:id="splitPane">
-            <HBox mouseTransparent="true" prefHeight="NaN">
-                <Label fx:id="labelName" maxWidth="140" text="Name" />
-                <Region HBox.hgrow="ALWAYS" />
-                <Label fx:id="labelTime" alignment="CENTER_RIGHT" text="Time" />
-            </HBox>
-            <Label fx:id="labelComment" text="Comment" />
-        </VBox>
+        <GridPane fx:id="root" mouseTransparent="true" maxWidth="Infinity">
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="ALWAYS" minHeight="10.0" prefHeight="30.0"/>
+                <RowConstraints vgrow="ALWAYS" minHeight="10.0" prefHeight="30.0"/>
+            </rowConstraints>
+
+            <Label fx:id="labelName" maxWidth="Infinity" text="Name" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <Label fx:id="labelComment" maxWidth="Infinity" text="Comment" GridPane.rowIndex="1"
+                   GridPane.columnIndex="0"/>
+            <Label fx:id="labelDate" maxWidth="Infinity" alignment="CENTER_RIGHT" text="Date" GridPane.rowIndex="0"
+                   GridPane.columnIndex="1"/>
+            <Label fx:id="labelLesson" maxWidth="Infinity" alignment="CENTER_RIGHT" text="Lesson" GridPane.rowIndex="1"
+                   GridPane.columnIndex="1"/>
+        </GridPane>
     </graphic>
 </fx:root>

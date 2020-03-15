@@ -17,7 +17,9 @@ public class ReservationCell extends CustomListCell<Reservation> {
     @FXML
     private Label labelName;
     @FXML
-    private Label labelTime;
+    private Label labelDate;
+    @FXML
+    private Label labelLesson;
 
     @FXML private Label labelComment;
     @FXML
@@ -45,11 +47,11 @@ public class ReservationCell extends CustomListCell<Reservation> {
         Pane pane = PaneFactory.getItemPane(Inventory.getInstance().getItem(reservation.getItemId()));
         itemPane.getChildren().clear();
         itemPane.getChildren().add(pane);
-//        itemPane.getChildren().add(new Label(reservation.getName()));
 
         labelName.textProperty().bind(reservation.nameProperty());
         labelComment.textProperty().bind(reservation.commentProperty());
-        labelTime.setText(reservation.getTime());
+        labelDate.setText(reservation.getDateText());
+        labelLesson.setText(reservation.getLesson().getLessonText());
 
         buttonReturn.setOnAction(event -> {
             ReservationManager.getInstance().returnReservation(reservation);

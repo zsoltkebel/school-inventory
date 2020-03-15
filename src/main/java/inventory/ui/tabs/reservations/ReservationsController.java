@@ -1,6 +1,7 @@
 package inventory.ui.tabs.reservations;
 
-import inventory.model.*;
+import inventory.model.Category;
+import inventory.model.Reservation;
 import inventory.model.singleton.Inventory;
 import inventory.model.singleton.ReservationManager;
 import inventory.ui.dialogs.ExportDialog;
@@ -19,8 +20,12 @@ import static javafx.scene.input.KeyEvent.KEY_PRESSED;
 
 public class ReservationsController implements Initializable {
 
-    @FXML private ComboBox<Category> comboBoxCategory;
-    @FXML private TextField textFieldName;
+    @FXML
+    private Label labelFilteringActive;
+    @FXML
+    private ComboBox<Category> comboBoxCategory;
+    @FXML
+    private TextField textFieldName;
     @FXML
     private Spinner<Integer> spinnerLimit;
     @FXML
@@ -97,17 +102,19 @@ public class ReservationsController implements Initializable {
         int[] selectedIds = comboBoxCategory.getSelectionModel().getSelectedItem() != null
                 ? new int[]{comboBoxCategory.getSelectionModel().getSelectedItem().getId()}
                 : Inventory.getInstance().getCategories()
-                    .stream()
-                    .mapToInt(Category::getId)
-                    .toArray();
+                .stream()
+                .mapToInt(Category::getId)
+                .toArray();
 
         ReservationManager.getInstance().filter(name, selectedIds);
+        labelFilteringActive.setVisible(true);
     }
 
     public void onClearFilterClicked(ActionEvent actionEvent) {
         textFieldName.setText(null);
         comboBoxCategory.getSelectionModel().clearSelection();
         ReservationManager.getInstance().clearFilter();
+        labelFilteringActive.setVisible(false);
     }
 
     public void onExportClicked(ActionEvent actionEvent) {

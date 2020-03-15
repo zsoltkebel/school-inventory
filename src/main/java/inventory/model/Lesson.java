@@ -28,7 +28,7 @@ public class Lesson {
     }
 
     public String getStartString() {
-        return start.getHour() + ":" + start.getMinute();
+        return String.format("%02d:%02d", start.getHour(), start.getMinute());
     }
 
     public LocalTime getEnd() {
@@ -36,7 +36,11 @@ public class Lesson {
     }
 
     public String getEndString() {
-        return end.getHour() + ":" + end.getMinute();
+        return String.format("%02d:%02d", end.getHour(), end.getMinute());
+    }
+
+    public String getLessonText() {
+        return getNo() + ".: " + getStartString() + " - " + getEndString();
     }
 
     public static Lesson newLesson(JSONObject jsonObject) {

@@ -128,8 +128,6 @@ public class Inventory {
         DATABASE.update(Database.TABLE_CATEGORIES, category);
 
         items.add(DATABASE.insert(Database.TABLE_ITEMS, item));
-
-//        saveCategoriesJSON();
     }
 
     /**

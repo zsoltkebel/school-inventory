@@ -1,14 +1,15 @@
 package inventory.ui.tabs.inventory;
 
 import inventory.model.Category;
-import inventory.model.singleton.Inventory;
 import inventory.model.Item;
+import inventory.model.singleton.Inventory;
 import inventory.ui.dialogs.ReserveDialog;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -58,19 +59,10 @@ public class ItemCell extends ListCell<Item> {
         } else {
             Category category = Inventory.getInstance().getCategory(item.getCategoryId());
             nameLabel.setText(item.getName());
-            nameLabel.setTextFill(item.isAvailable() ? Paint.valueOf("#00ff00")
-                    : (item.getCurrentReservations().isEmpty() ? Paint.valueOf("#ff0000") : Paint.valueOf("#ffff00")));
-
             categoryLabel.textProperty().bind(category.nameProperty());
             descriptionLabel.setText(item.getDescription());
 
             setGraphic(cellPane);
-
-            if (item.isAvailable()) {
-                reserveButton.setDisable(false);
-            } else {
-                reserveButton.setDisable(true);
-            }
         }
     }
 }
