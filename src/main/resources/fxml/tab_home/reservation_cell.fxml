@@ -2,27 +2,40 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<fx:root prefHeight="70" prefWidth="500.0" type="javafx.scene.control.ListCell"
-         xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="javafx.scene.control.ListCell" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+         prefWidth="500">
     <graphic>
-        <HBox fx:id="hBox" alignment="CENTER" spacing="10">
-            <Pane fx:id="itemPane"/> <!-- placeholder for item pane -->
-            <VBox fx:id="vBox" HBox.hgrow="ALWAYS">
-                <HBox mouseTransparent="true">
-                    <Label fx:id="labelName" maxWidth="140" text="Name"/>
-                    <Region HBox.hgrow="ALWAYS"/>
-                </HBox>
-                <Label fx:id="labelComment" text="Comment"/>
-            </VBox>
-            <GridPane alignment="CENTER">
-                <Label text="Date:  " maxWidth="Infinity" alignment="CENTER_RIGHT" GridPane.rowIndex="0"
-                       GridPane.columnIndex="0"/>
-                <Label fx:id="labelDate" text="Time" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-                <Label text="Lesson:  " maxWidth="Infinity" alignment="CENTER_RIGHT" GridPane.rowIndex="1"
-                       GridPane.columnIndex="0"/>
-                <Label fx:id="labelLesson" text="Lesson" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <GridPane fx:id="root" alignment="CENTER" hgap="10" vgap="5">
+            <columnConstraints>
+                <ColumnConstraints/>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="ALWAYS"/>
+                <RowConstraints vgrow="ALWAYS"/>
+            </rowConstraints>
+
+            <Pane fx:id="itemPane"
+                  GridPane.rowIndex="0" GridPane.columnIndex="0"
+                  GridPane.rowSpan="2"/> <!-- placeholder for item pane -->
+            <Label fx:id="labelName" maxWidth="140" text="Name"
+                   GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+            <Label fx:id="labelComment" text="Comment"
+                   GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+            <GridPane alignment="CENTER" hgap="5"
+                      GridPane.rowIndex="0" GridPane.columnIndex="2" GridPane.rowSpan="2">
+                <Label text="Date:" maxWidth="Infinity" maxHeight="Infinity" alignment="BOTTOM_RIGHT"
+                       GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <Label fx:id="labelDate" text="Time" maxWidth="Infinity" maxHeight="Infinity" alignment="BOTTOM_LEFT"
+                       GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <Label text="Lesson:" maxWidth="Infinity" maxHeight="Infinity" alignment="TOP_RIGHT"
+                       GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <Label fx:id="labelLesson" text="Lesson" maxWidth="Infinity" maxHeight="Infinity" alignment="TOP_LEFT"
+                       GridPane.rowIndex="1" GridPane.columnIndex="1"/>
             </GridPane>
-            <Button fx:id="buttonReturn" text="Return"/>
-        </HBox>
+            <Button fx:id="buttonReturn" text="Return" maxHeight="Infinity"
+                    GridPane.rowIndex="0" GridPane.columnIndex="4" GridPane.rowSpan="2"/>
+        </GridPane>
+
     </graphic>
 </fx:root>

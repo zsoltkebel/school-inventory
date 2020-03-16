@@ -9,14 +9,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class ItemCell extends ListCell<Item> {
 
-    @FXML private Pane cellPane;
+    @FXML private GridPane root;
 
     @FXML private Label nameLabel;
     @FXML private Label categoryLabel;
@@ -39,7 +39,6 @@ public class ItemCell extends ListCell<Item> {
 
             reserveButton.setOnAction(event -> {
                 Stage dialog = new ReserveDialog(item);
-
                 dialog.show();
             });
 
@@ -62,7 +61,7 @@ public class ItemCell extends ListCell<Item> {
             categoryLabel.textProperty().bind(category.nameProperty());
             descriptionLabel.setText(item.getDescription());
 
-            setGraphic(cellPane);
+            setGraphic(root);
         }
     }
 }

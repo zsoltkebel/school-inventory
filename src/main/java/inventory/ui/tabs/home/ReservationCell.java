@@ -1,18 +1,20 @@
 package inventory.ui.tabs.home;
 
-import inventory.model.singleton.Inventory;
 import inventory.model.Reservation;
+import inventory.model.singleton.Inventory;
 import inventory.model.singleton.ReservationManager;
 import inventory.ui.CustomListCell;
 import inventory.ui.PaneFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 public class ReservationCell extends CustomListCell<Reservation> {
+
+    @FXML
+    private GridPane root;
 
     @FXML
     private Label labelName;
@@ -20,12 +22,9 @@ public class ReservationCell extends CustomListCell<Reservation> {
     private Label labelDate;
     @FXML
     private Label labelLesson;
+    @FXML
+    private Label labelComment;
 
-    @FXML private Label labelComment;
-    @FXML
-    private HBox hBox;
-    @FXML
-    private VBox vBox;
     @FXML
     private Pane itemPane;
     @FXML
@@ -57,7 +56,7 @@ public class ReservationCell extends CustomListCell<Reservation> {
             ReservationManager.getInstance().returnReservation(reservation);
         });
 
-        setGraphic(hBox);
+        setGraphic(root);
 
     }
 }
