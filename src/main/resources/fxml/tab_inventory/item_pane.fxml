@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
 <HBox fx:id="itemPane" spacing="10" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      stylesheets="/styles/panes.css">
+      stylesheets="/styles/panes.css" maxWidth="200" maxHeight="70">
     <padding>
         <Insets topRightBottomLeft="5"/>
     </padding>

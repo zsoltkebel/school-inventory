@@ -73,7 +73,8 @@ public class DialogNewItemController implements Initializable {
     @FXML
     public void onSaveClicked(ActionEvent actionEvent) {
         if (item != null) {
-            if (getCategory() == null) return;
+            // not creating new item if category or name is missing
+            if (getCategory() == null || getName() == null || getName().equals("")) return;
 
             Item newItem = new Item(item);
             newItem.setName(getName());

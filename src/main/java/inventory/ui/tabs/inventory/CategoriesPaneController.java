@@ -73,8 +73,10 @@ public class CategoriesPaneController implements Initializable {
 
         textField.requestFocus();
         button.setOnAction(actionEvent -> {
-            inventory.insertCategory(textField.getText());
-            dialog.close();
+            if (textField.getText() != null && !textField.getText().equals("")) {
+                inventory.insertCategory(textField.getText());
+                dialog.close();
+            }
         });
 
     }

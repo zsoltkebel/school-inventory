@@ -9,12 +9,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 public class ReservationCell extends CustomListCell<Reservation> {
 
     @FXML
-    private GridPane root;
+    private Pane root;
 
     @FXML
     private Label labelName;
