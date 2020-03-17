@@ -61,13 +61,11 @@ public class ExcelGenerator {
         try {
             if (!toFile.exists()) {
                 File parent = toFile.getParentFile();
-                if (parent != null) {
-                    if (parent.mkdirs() && toFile.createNewFile()) {
-                        FileOutputStream fileOut = new FileOutputStream(toFile);
-                        workbook.write(fileOut);
-                        workbook.close();
-                        fileOut.close();
-                    }
+                if (parent != null && toFile.createNewFile()) {
+                    FileOutputStream fileOut = new FileOutputStream(toFile);
+                    workbook.write(fileOut);
+                    workbook.close();
+                    fileOut.close();
                 }
             }
         } catch (IOException e) {

@@ -20,7 +20,6 @@ public class Main extends Application {
         primaryStage.setTitle("Inventory App");
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("styles/styles.css");
 
         primaryStage.setScene(scene);
         primaryStage.show();

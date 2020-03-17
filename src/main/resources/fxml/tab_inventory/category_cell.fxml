@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root type="javafx.scene.control.ListCell" stylesheets="/styles/category_item.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<fx:root type="javafx.scene.control.ListCell" stylesheets="/styles/category_cell.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <graphic>
         <SplitPane fx:id="splitPane" dividerPositions="0.75" mouseTransparent="true" minWidth="100">
             <AnchorPane minHeight="0.0" minWidth="0.0">

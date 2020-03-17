@@ -4,11 +4,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
 <VBox fx:controller="inventory.ui.tabs.inventory.CategoriesPaneController" xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml" alignment="CENTER_LEFT" prefWidth="200">
+      xmlns:fx="http://javafx.com/fxml" alignment="CENTER_LEFT" prefWidth="200" spacing="5">
     <padding><Insets topRightBottomLeft="5"/></padding>
     <HBox alignment="CENTER_LEFT" spacing="10">
         <Button text="New" onAction="#handleButtonAction" maxWidth="1.7976931348623157E308"/>
-        <Label text="Categories" stylesheets="/styles/title.css"/>
+        <Label text="Categories"/>
     </HBox>
 
     <ListView fx:id="listView" VBox.vgrow="ALWAYS"

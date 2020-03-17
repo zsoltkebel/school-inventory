@@ -42,7 +42,6 @@ public class CategoryCellFactory implements Callback<ListView<Category>, ListCel
             hBox.getChildren().addAll(textField, button);
 
             Scene dialogScene = new Scene(hBox);
-            dialogScene.getStylesheets().add("styles/styles.css");
 
             dialog.setScene(dialogScene);
 

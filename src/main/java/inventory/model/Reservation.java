@@ -22,7 +22,7 @@ public class Reservation extends Record<Reservation> {
     public Reservation() {
         this(
                 -1,
-                LocalDate.now(),
+                LocalDate.now().minusMonths(2),
                 -1,
                 -1,
                 "",
@@ -149,7 +149,7 @@ public class Reservation extends Record<Reservation> {
                 !lesson.getEnd().isBefore(time);
     }
 
-    public boolean before(Instant instant) {
+    public boolean isTerminatedBy(Instant instant) {
         LocalDate date = instant.atZone(ZoneId.systemDefault()).toLocalDate();
         LocalTime time = LocalTime.from(instant.atZone(ZoneId.systemDefault()));
         Lesson lesson = getLesson();

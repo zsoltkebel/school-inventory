@@ -111,8 +111,8 @@ public class ReservationDetailsController implements Initializable {
     private void removeBind(Reservation reservation) {
         try {
             textFieldName.textProperty().unbindBidirectional(reservation.nameProperty());
-            textAreaComment.setText(reservation.getComment());
-            datePicker.setValue(reservation.getDate());
+            textAreaComment.textProperty().unbindBidirectional(reservation.commentProperty());
+            datePicker.valueProperty().unbindBidirectional(reservation.dateProperty());
         } catch (NullPointerException ignored) {}
     }
 

@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
+import java.time.Instant;
+
 public class ReservationCell extends CustomListCell<Reservation> {
 
     @FXML
@@ -39,7 +41,8 @@ public class ReservationCell extends CustomListCell<Reservation> {
         labelDate.setText(reservation.getDateText());
         labelLesson.setText(reservation.getLesson().getNo() + ". lesson");
 
-        if (!reservation.isReturned()) {
+        // red text if item should be returned by now
+        if (reservation.isTerminatedBy(Instant.now()) && !reservation.isReturned()) {
             labelName.setTextFill(Color.RED);
             labelComment.setTextFill(Color.RED);
         } else {

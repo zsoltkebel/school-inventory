@@ -4,13 +4,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <VBox fx:controller="inventory.ui.tabs.inventory.ItemsController" xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml" alignment="CENTER_LEFT" prefWidth="200">
+      xmlns:fx="http://javafx.com/fxml" alignment="CENTER_LEFT" prefWidth="200" spacing="5">
     <padding>
         <Insets topRightBottomLeft="5"/>
     </padding>
     <HBox alignment="CENTER_LEFT" spacing="10">
         <Button text="New" onAction="#handleAddButtonAction" maxWidth="1.7976931348623157E308"/>
-        <Label text="Items" stylesheets="/styles/title.css"/>
+        <Label text="Items"/>
         <Region HBox.hgrow="ALWAYS"/>
         <HBox fx:id="filteringPane" visible="false" alignment="CENTER_RIGHT" spacing="10">
             <Label text="Filter:" textFill="blue"/>

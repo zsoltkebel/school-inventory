@@ -63,7 +63,6 @@ public class CategoriesPaneController implements Initializable {
         hBox.getChildren().addAll(textField, button);
 
         Scene dialogScene = new Scene(hBox);
-        dialogScene.getStylesheets().add("styles/styles.css");
 
         dialog.setScene(dialogScene);
 

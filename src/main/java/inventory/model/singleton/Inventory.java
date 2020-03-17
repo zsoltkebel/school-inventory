@@ -10,7 +10,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * Singleton
+ * Class implementing the singleton design pattern
+ *
+ * Wraps the characteristics and functionality of an inventory  that contains
+ * a list of {@link Category} objects and a lost of {@link Item} objects
+ * Manages the operations (insert/edit/remove) and keeps the records of the database
+ * synchronized with the objects in the memory
  */
 public class Inventory {
 
@@ -23,6 +28,14 @@ public class Inventory {
         return SINGLE_INVENTORY;
     }
 
+    private Inventory() {
+        this.categories = FXCollections.observableArrayList();
+        this.items = FXCollections.observableArrayList();
+
+        loadCategories();
+        loadItems();
+    }
+
     // instance variables
     private ObservableList<Category> categories;
     private ObservableList<Item> items;
@@ -31,14 +44,6 @@ public class Inventory {
 
     // variable for filtering
     private IntegerProperty filterCategoryId = new SimpleIntegerProperty(-1);
-
-    private Inventory() {
-        this.categories = FXCollections.observableArrayList();
-        this.items = FXCollections.observableArrayList();
-
-        loadCategories();
-        loadItems();
-    }
 
     public ObservableList<Category> getCategories() {
         return categories;
