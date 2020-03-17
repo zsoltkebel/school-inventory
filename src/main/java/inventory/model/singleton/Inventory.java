@@ -12,8 +12,8 @@ import javafx.collections.ObservableList;
 /**
  * Class implementing the singleton design pattern
  *
- * Wraps the characteristics and functionality of an inventory  that contains
- * a list of {@link Category} objects and a lost of {@link Item} objects
+ * Wraps the characteristics and functionality of an inventory that contains
+ * a list of {@link Category} objects and a list of {@link Item} objects
  * Manages the operations (insert/edit/remove) and keeps the records of the database
  * synchronized with the objects in the memory
  */
