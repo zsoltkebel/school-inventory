@@ -13,6 +13,14 @@ public class ReflectionUtil {
         return getFields(type, Record.class, except);
     }
 
+    /**
+     * Returns all instance variables (fields) of a class including those that are inherited
+     *
+     * @param from   The class whose fields are going to be returned
+     * @param until  Inherited fields are retrieved until this superclass is reached
+     * @param except Names of the fields that are excluded from the return list
+     * @return Fields of the class
+     */
     public static List<Field> getFields(Class<?> from, Class<?> until, String... except) {
         if (!until.isAssignableFrom(from)) return new ArrayList<>();
 

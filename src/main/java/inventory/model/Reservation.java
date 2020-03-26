@@ -22,7 +22,7 @@ public class Reservation extends Record<Reservation> {
     public Reservation() {
         this(
                 -1,
-                LocalDate.now().minusMonths(2),
+                LocalDate.now(),
                 -1,
                 -1,
                 "",
