@@ -42,18 +42,17 @@ public class Database {
 
     private Connection conn;
 
-    private final String DB_URL = "jdbc:sqlite:Database.db";
-
     private Database() {
         getConnection();
     }
 
     private void getConnection() {
         try {
-            Class.forName("org.sqlite.JDBC");
+            String DB_URL = "jdbc:sqlite:Database.db";
+
             conn = DriverManager.getConnection(DB_URL);
             initialize();
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
