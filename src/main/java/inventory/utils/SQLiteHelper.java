@@ -15,6 +15,17 @@ import static inventory.utils.ReflectionUtil.getFields;
 
 public class SQLiteHelper {
 
+    private final static Map<Class<?>, Class<?>> CLASS_SIMPLE_MAP = new HashMap<Class<?>, Class<?>>() {{
+        put(int.class, int.class);
+        put(IntegerProperty.class, int.class);
+        put(StringProperty.class, String.class);
+        put(BooleanProperty.class, boolean.class);
+        put(ObjectProperty.class, Date.class);
+        put(Date.class, Date.class);
+        put(String.class, String.class);
+        put(boolean.class, boolean.class);
+    }};
+
     static <T extends Record<T>> String getInitTableCommand(String tableName, Class<T> forClass) {
         String sql = "CREATE TABLE IF NOT EXISTS " + tableName + "(";
 
@@ -72,27 +83,18 @@ public class SQLiteHelper {
     }
 
     public static String getSQLTypeString(Class<?> forClass) {
-        return StringUtils.capitalize(getSQLType(forClass).getSimpleName());
+        Class<?> simpleClass = getSQLType(forClass);
+        return simpleClass != null
+                ? StringUtils.capitalize(simpleClass.getSimpleName())
+                : null;
     }
 
     public static Class<?> getSQLType(Class<?> type) {
-        Map<Class<?>, Class<?>> map = new HashMap<Class<?>, Class<?>>() {{
-            put(int.class, int.class);
-            put(IntegerProperty.class, int.class);
-            put(StringProperty.class, String.class);
-            put(BooleanProperty.class, boolean.class);
-            put(ObjectProperty.class, Date.class);
-            put(Date.class, Date.class);
-            put(String.class, String.class);
-            put(boolean.class, boolean.class);
-        }};
-
-        for (Map.Entry<Class<?>, Class<?>> entry : map.entrySet()) {
+        for (Map.Entry<Class<?>, Class<?>> entry : CLASS_SIMPLE_MAP.entrySet()) {
             if (entry.getKey().equals(type)) {
                 return entry.getValue();
             }
         }
-
         return null;
     }
 
