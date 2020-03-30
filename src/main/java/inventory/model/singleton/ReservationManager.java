@@ -280,7 +280,7 @@ public class ReservationManager {
 
     public void remove(int id) {
         reservationsObservable().removeIf(reservation -> reservation.getId() == id);
-        Database.getInstance().delete(id, Database.TABLE_RESERVATIONS);
+        Database.getInstance().remove(id, Database.TABLE_RESERVATIONS);
     }
 
     public void returnReservation(Reservation reservation) {

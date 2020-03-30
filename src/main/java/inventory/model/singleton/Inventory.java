@@ -110,7 +110,7 @@ public class Inventory {
         // delete category
         categories.removeIf(category -> category.getId() == id);
 
-        DATABASE.delete(id, Database.TABLE_CATEGORIES);
+        DATABASE.remove(id, Database.TABLE_CATEGORIES);
     }
 
     private void loadItems() {
@@ -158,7 +158,7 @@ public class Inventory {
         // delete item
         items.removeIf(current -> current.getId() == item.getId());
 
-        DATABASE.delete(item.getId(), Database.TABLE_ITEMS);
+        DATABASE.remove(item.getId(), Database.TABLE_ITEMS);
     }
 
     public void updateItem(Item oldItem, Item newItem) {

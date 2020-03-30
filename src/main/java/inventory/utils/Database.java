@@ -85,7 +85,7 @@ public class Database {
      * @param id    the id of the record to be deleted
      * @param table the name of the table
      */
-    public void delete(int id, String table) {
+    public void remove(int id, String table) {
         String sql = "DELETE FROM " + table + " WHERE id = ?"; // SQL statement
 
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {

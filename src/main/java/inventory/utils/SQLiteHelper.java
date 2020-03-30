@@ -102,6 +102,7 @@ public class SQLiteHelper {
         String methodName = "set" + getSQLTypeString(field.getType());
 
         try {
+            // return the setter method of the PreparedStatement class with the correct parameters
             return PreparedStatement.class.getMethod(methodName, int.class, getSQLType(field.getType()));
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
