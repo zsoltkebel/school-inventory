@@ -5,7 +5,6 @@ import inventory.model.Category;
 import inventory.model.Item;
 import inventory.model.Record;
 import inventory.model.Reservation;
-import javafx.beans.property.ListProperty;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -80,13 +79,19 @@ public class Database {
         }
     }
 
+    /**
+     * Removes a record from the specified table in the database
+     *
+     * @param id    the id of the record to be deleted
+     * @param table the name of the table
+     */
     public void delete(int id, String table) {
-        String sql = "DELETE FROM " + table + " WHERE id = ?";
+        String sql = "DELETE FROM " + table + " WHERE id = ?"; // SQL statement
 
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, id);
+        try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
             // execute the delete statement
-            pstmt.executeUpdate();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
