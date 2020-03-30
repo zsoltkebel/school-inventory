@@ -252,19 +252,16 @@ public class Database {
 
     private static Method getterMethod(Field field) {
         String methodName = (Objects.equals(getSQLType(field.getType()), boolean.class)
-                ? "is"
-                : "get")
-                + StringUtils.capitalize(field.getName());
+                ? "is" // start of the getter method field is boolean
+                : "get") // start of the getter method otherwise
+                + StringUtils.capitalize(field.getName()); // field name capitalized
 
-        //ending
         if (Objects.equals(getSQLType(field.getType()), Date.class)) {
-            methodName += "SQL";
-        } else if (Objects.equals(field.getType(), ListProperty.class)) {
-            methodName += "String";
+            methodName += "SQL"; // if it field has a dedicated SQL class for it e.g. java.sql.Date
         }
 
         try {
-            return field.getDeclaringClass().getMethod(methodName);
+            return field.getDeclaringClass().getMethod(methodName); // return the method of the class
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
             return null;
